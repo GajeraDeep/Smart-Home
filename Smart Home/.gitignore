@@ -86,7 +86,6 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
-# I don’t want to show my secrets
-/GoogleService-Info.plist
-
 # End of https://www.gitignore.io/api/swift,macos
+
+GoogleService-Info.plist
