@@ -527,6 +527,10 @@ extension UserList: UITableViewDataSource, UITableViewDelegate {
         
         tableView.endUpdates()
     }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
 }
 
 extension UserList: CUserTableViewCellDelegate {
