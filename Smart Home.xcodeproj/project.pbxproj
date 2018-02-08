@@ -1,0 +1,672 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		070F7E0F200FC6A7001BDD48 /* TabBarViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F7E0E200FC6A7001BDD48 /* TabBarViewControler.swift */; };
+		071598DA201BB12B0012A540 /* SecurityButton.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 071598D8201BB12B0012A540 /* SecurityButton.xcassets */; };
+		071598DB201BB12B0012A540 /* SecurityButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071598D9201BB12B0012A540 /* SecurityButtonView.swift */; };
+		076F0437202380FC00806482 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076F0436202380FC00806482 /* TextInputViewController.swift */; };
+		076F04392023918F00806482 /* CUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076F04382023918F00806482 /* CUserTableViewCell.swift */; };
+		077B100A2000AFDE00456633 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077B10092000AFDE00456633 /* AppDelegate.swift */; };
+		077B100F2000AFDE00456633 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077B100D2000AFDE00456633 /* Main.storyboard */; };
+		077B10112000AFDE00456633 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 077B10102000AFDE00456633 /* Assets.xcassets */; };
+		077B10142000AFDE00456633 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077B10122000AFDE00456633 /* LaunchScreen.storyboard */; };
+		077B101C2000C78100456633 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 077B101B2000C78100456633 /* Podfile */; };
+		077BAEBB200FBAB300118A73 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BAEBA200FBAB300118A73 /* HomeViewController.swift */; };
+		077BAEBD200FBD1300118A73 /* ControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BAEBC200FBD1300118A73 /* ControllerViewController.swift */; };
+		077BAEBF200FC12200118A73 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BAEBE200FC12200118A73 /* NotificationViewController.swift */; };
+		0784669F20286F9200786326 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784669E20286F9200786326 /* Reachability.swift */; };
+		078466A12028A6E500786326 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078466A02028A6E400786326 /* MessageView.swift */; };
+		0786D3E32013419D00771CF0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786D3E22013419D00771CF0 /* Enums.swift */; };
+		0786D3E52013426C00771CF0 /* Isolated Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786D3E42013426C00771CF0 /* Isolated Structs.swift */; };
+		0786D3E7201354CA00771CF0 /* GetControllerIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786D3E6201354CA00771CF0 /* GetControllerIDViewController.swift */; };
+		078F00EF201B22E400447A12 /* ApplianceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078F00EE201B22E400447A12 /* ApplianceCollectionViewCell.swift */; };
+		07920A512010A788000E6FD8 /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A422010A788000E6FD8 /* Nunito-Black.ttf */; };
+		07920A522010A788000E6FD8 /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A432010A788000E6FD8 /* Nunito-BlackItalic.ttf */; };
+		07920A532010A788000E6FD8 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A442010A788000E6FD8 /* Nunito-Bold.ttf */; };
+		07920A542010A788000E6FD8 /* Nunito-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A452010A788000E6FD8 /* Nunito-BoldItalic.ttf */; };
+		07920A552010A788000E6FD8 /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A462010A788000E6FD8 /* Nunito-ExtraBold.ttf */; };
+		07920A562010A788000E6FD8 /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A472010A788000E6FD8 /* Nunito-ExtraBoldItalic.ttf */; };
+		07920A572010A788000E6FD8 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A482010A788000E6FD8 /* Nunito-ExtraLight.ttf */; };
+		07920A582010A788000E6FD8 /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A492010A788000E6FD8 /* Nunito-ExtraLightItalic.ttf */; };
+		07920A592010A788000E6FD8 /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4A2010A788000E6FD8 /* Nunito-Italic.ttf */; };
+		07920A5A2010A788000E6FD8 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4B2010A788000E6FD8 /* Nunito-Light.ttf */; };
+		07920A5B2010A788000E6FD8 /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4C2010A788000E6FD8 /* Nunito-LightItalic.ttf */; };
+		07920A5C2010A788000E6FD8 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4D2010A788000E6FD8 /* Nunito-Regular.ttf */; };
+		07920A5D2010A788000E6FD8 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4E2010A788000E6FD8 /* Nunito-SemiBold.ttf */; };
+		07920A5E2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4F2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf */; };
+		07920A5F2010A788000E6FD8 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07920A502010A788000E6FD8 /* OFL.txt */; };
+		07920A612010ADB9000E6FD8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07920A602010ADB9000E6FD8 /* SignInViewController.swift */; };
+		07920A672010B7AD000E6FD8 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07920A662010B7AD000E6FD8 /* PaddedTextField.swift */; };
+		0794F68720125911008968AD /* PassTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794F68620125911008968AD /* PassTextField.swift */; };
+		07A37E1E2029AD4E00A13D1D /* UsersListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A37E1D2029AD4E00A13D1D /* UsersListProvider.swift */; };
+		07A9759E2010E2AD00676A69 /* UIView + Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9759D2010E2AD00676A69 /* UIView + Extentions.swift */; };
+		07A975A02010F0C500676A69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07A9759F2010F0C500676A69 /* GoogleService-Info.plist */; };
+		07D982732026D6A0001450BE /* StatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D982722026D6A0001450BE /* StatesManager.swift */; };
+		07D982762026EFF2001450BE /* AnimationViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D982752026EFF2001450BE /* AnimationViewProtocol.swift */; };
+		07D9BB3F2019B7FA00390007 /* CreateNewAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9BB3E2019B7FA00390007 /* CreateNewAccountViewController.swift */; };
+		07E0BD0D201C751700BE7E63 /* Bulb.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07E0BD0B201C751700BE7E63 /* Bulb.xcassets */; };
+		07E0BD0E201C751700BE7E63 /* BulbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E0BD0C201C751700BE7E63 /* BulbView.swift */; };
+		07E0BD18201C75FD00BE7E63 /* Fan.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07E0BD16201C75FD00BE7E63 /* Fan.xcassets */; };
+		07E0BD19201C75FD00BE7E63 /* FanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E0BD17201C75FD00BE7E63 /* FanView.swift */; };
+		07FF85D620261308001808BE /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF85D520261308001808BE /* FirebaseManager.swift */; };
+		31B0D52558A1A55795361A91 /* Pods_Smart_Home.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88B44C85A0BA75AA4ABE7D /* Pods_Smart_Home.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		070F7E0E200FC6A7001BDD48 /* TabBarViewControler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewControler.swift; sourceTree = "<group>"; };
+		071598D8201BB12B0012A540 /* SecurityButton.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SecurityButton.xcassets; sourceTree = "<group>"; };
+		071598D9201BB12B0012A540 /* SecurityButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityButtonView.swift; sourceTree = "<group>"; };
+		076F0436202380FC00806482 /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
+		076F04382023918F00806482 /* CUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUserTableViewCell.swift; sourceTree = "<group>"; };
+		077B10062000AFDE00456633 /* Smart Home.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smart Home.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		077B10092000AFDE00456633 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		077B100E2000AFDE00456633 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		077B10102000AFDE00456633 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		077B10132000AFDE00456633 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		077B10152000AFDE00456633 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		077B101B2000C78100456633 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		077BAEBA200FBAB300118A73 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		077BAEBC200FBD1300118A73 /* ControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerViewController.swift; sourceTree = "<group>"; };
+		077BAEBE200FC12200118A73 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		0784669E20286F9200786326 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		078466A02028A6E400786326 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		0786D3E22013419D00771CF0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		0786D3E42013426C00771CF0 /* Isolated Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Isolated Structs.swift"; sourceTree = "<group>"; };
+		0786D3E6201354CA00771CF0 /* GetControllerIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetControllerIDViewController.swift; sourceTree = "<group>"; };
+		078F00EE201B22E400447A12 /* ApplianceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplianceCollectionViewCell.swift; sourceTree = "<group>"; };
+		07920A422010A788000E6FD8 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
+		07920A432010A788000E6FD8 /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
+		07920A442010A788000E6FD8 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		07920A452010A788000E6FD8 /* Nunito-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BoldItalic.ttf"; sourceTree = "<group>"; };
+		07920A462010A788000E6FD8 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
+		07920A472010A788000E6FD8 /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		07920A482010A788000E6FD8 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
+		07920A492010A788000E6FD8 /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		07920A4A2010A788000E6FD8 /* Nunito-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic.ttf"; sourceTree = "<group>"; };
+		07920A4B2010A788000E6FD8 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Light.ttf"; sourceTree = "<group>"; };
+		07920A4C2010A788000E6FD8 /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-LightItalic.ttf"; sourceTree = "<group>"; };
+		07920A4D2010A788000E6FD8 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		07920A4E2010A788000E6FD8 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		07920A4F2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		07920A502010A788000E6FD8 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		07920A602010ADB9000E6FD8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		07920A662010B7AD000E6FD8 /* PaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
+		0794F68620125911008968AD /* PassTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassTextField.swift; sourceTree = "<group>"; };
+		07A37E1D2029AD4E00A13D1D /* UsersListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListProvider.swift; sourceTree = "<group>"; };
+		07A9759D2010E2AD00676A69 /* UIView + Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extentions.swift"; sourceTree = "<group>"; };
+		07A9759F2010F0C500676A69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		07D982722026D6A0001450BE /* StatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesManager.swift; sourceTree = "<group>"; };
+		07D982752026EFF2001450BE /* AnimationViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewProtocol.swift; sourceTree = "<group>"; };
+		07D9BB3E2019B7FA00390007 /* CreateNewAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewAccountViewController.swift; sourceTree = "<group>"; };
+		07E0BD0B201C751700BE7E63 /* Bulb.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Bulb.xcassets; sourceTree = "<group>"; };
+		07E0BD0C201C751700BE7E63 /* BulbView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulbView.swift; sourceTree = "<group>"; };
+		07E0BD16201C75FD00BE7E63 /* Fan.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Fan.xcassets; sourceTree = "<group>"; };
+		07E0BD17201C75FD00BE7E63 /* FanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanView.swift; sourceTree = "<group>"; };
+		07FF85D520261308001808BE /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		1FD3DE4B6BE2C5C2AAE296EB /* Pods-Smart Home.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smart Home.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Smart Home/Pods-Smart Home.debug.xcconfig"; sourceTree = "<group>"; };
+		2E88B44C85A0BA75AA4ABE7D /* Pods_Smart_Home.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smart_Home.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A53681748452088C98862C87 /* Pods-Smart Home.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smart Home.release.xcconfig"; path = "Pods/Target Support Files/Pods-Smart Home/Pods-Smart Home.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		077B10032000AFDE00456633 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31B0D52558A1A55795361A91 /* Pods_Smart_Home.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		071598D7201BB1180012A540 /* Security Button Animations */ = {
+			isa = PBXGroup;
+			children = (
+				071598D8201BB12B0012A540 /* SecurityButton.xcassets */,
+				071598D9201BB12B0012A540 /* SecurityButtonView.swift */,
+			);
+			path = "Security Button Animations";
+			sourceTree = "<group>";
+		};
+		077B0FFD2000AFDE00456633 = {
+			isa = PBXGroup;
+			children = (
+				077B10082000AFDE00456633 /* Smart Home */,
+				077B10072000AFDE00456633 /* Products */,
+				EF1DE7C9715D6544E0DCE3B5 /* Pods */,
+				0F4E09D43349090C22FCD083 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		077B10072000AFDE00456633 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				077B10062000AFDE00456633 /* Smart Home.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		077B10082000AFDE00456633 /* Smart Home */ = {
+			isa = PBXGroup;
+			children = (
+				07D9BB422019CD4600390007 /* Model */,
+				07920A632010B578000E6FD8 /* View */,
+				07920A622010ADCB000E6FD8 /* View Controllers */,
+				077B10092000AFDE00456633 /* AppDelegate.swift */,
+				077B100D2000AFDE00456633 /* Main.storyboard */,
+				077B10102000AFDE00456633 /* Assets.xcassets */,
+				077B10122000AFDE00456633 /* LaunchScreen.storyboard */,
+				077B101B2000C78100456633 /* Podfile */,
+				077B10152000AFDE00456633 /* Info.plist */,
+				07A9759F2010F0C500676A69 /* GoogleService-Info.plist */,
+				07920A412010A788000E6FD8 /* Nunito */,
+			);
+			path = "Smart Home";
+			sourceTree = "<group>";
+		};
+		07920A412010A788000E6FD8 /* Nunito */ = {
+			isa = PBXGroup;
+			children = (
+				07920A422010A788000E6FD8 /* Nunito-Black.ttf */,
+				07920A432010A788000E6FD8 /* Nunito-BlackItalic.ttf */,
+				07920A442010A788000E6FD8 /* Nunito-Bold.ttf */,
+				07920A452010A788000E6FD8 /* Nunito-BoldItalic.ttf */,
+				07920A462010A788000E6FD8 /* Nunito-ExtraBold.ttf */,
+				07920A472010A788000E6FD8 /* Nunito-ExtraBoldItalic.ttf */,
+				07920A482010A788000E6FD8 /* Nunito-ExtraLight.ttf */,
+				07920A492010A788000E6FD8 /* Nunito-ExtraLightItalic.ttf */,
+				07920A4A2010A788000E6FD8 /* Nunito-Italic.ttf */,
+				07920A4B2010A788000E6FD8 /* Nunito-Light.ttf */,
+				07920A4C2010A788000E6FD8 /* Nunito-LightItalic.ttf */,
+				07920A4D2010A788000E6FD8 /* Nunito-Regular.ttf */,
+				07920A4E2010A788000E6FD8 /* Nunito-SemiBold.ttf */,
+				07920A4F2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf */,
+				07920A502010A788000E6FD8 /* OFL.txt */,
+			);
+			path = Nunito;
+			sourceTree = "<group>";
+		};
+		07920A622010ADCB000E6FD8 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				076F0436202380FC00806482 /* TextInputViewController.swift */,
+				07920A602010ADB9000E6FD8 /* SignInViewController.swift */,
+				07D9BB3E2019B7FA00390007 /* CreateNewAccountViewController.swift */,
+				0786D3E6201354CA00771CF0 /* GetControllerIDViewController.swift */,
+				070F7E0E200FC6A7001BDD48 /* TabBarViewControler.swift */,
+				077BAEBA200FBAB300118A73 /* HomeViewController.swift */,
+				077BAEBC200FBD1300118A73 /* ControllerViewController.swift */,
+				077BAEBE200FC12200118A73 /* NotificationViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		07920A632010B578000E6FD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				07920A662010B7AD000E6FD8 /* PaddedTextField.swift */,
+				0794F68620125911008968AD /* PassTextField.swift */,
+				07A9759D2010E2AD00676A69 /* UIView + Extentions.swift */,
+				078F00EE201B22E400447A12 /* ApplianceCollectionViewCell.swift */,
+				076F04382023918F00806482 /* CUserTableViewCell.swift */,
+				078466A02028A6E400786326 /* MessageView.swift */,
+				07D982742026EFB7001450BE /* Animations */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		07D982742026EFB7001450BE /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				07E0BD15201C75FD00BE7E63 /* Fan Button Animation */,
+				07E0BD0A201C751700BE7E63 /* Bulb Button Animation */,
+				071598D7201BB1180012A540 /* Security Button Animations */,
+				07D982752026EFF2001450BE /* AnimationViewProtocol.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		07D9BB422019CD4600390007 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0786D3E22013419D00771CF0 /* Enums.swift */,
+				0786D3E42013426C00771CF0 /* Isolated Structs.swift */,
+				07FF85D520261308001808BE /* FirebaseManager.swift */,
+				07D982722026D6A0001450BE /* StatesManager.swift */,
+				0784669E20286F9200786326 /* Reachability.swift */,
+				07A37E1D2029AD4E00A13D1D /* UsersListProvider.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		07E0BD0A201C751700BE7E63 /* Bulb Button Animation */ = {
+			isa = PBXGroup;
+			children = (
+				07E0BD0B201C751700BE7E63 /* Bulb.xcassets */,
+				07E0BD0C201C751700BE7E63 /* BulbView.swift */,
+			);
+			path = "Bulb Button Animation";
+			sourceTree = "<group>";
+		};
+		07E0BD15201C75FD00BE7E63 /* Fan Button Animation */ = {
+			isa = PBXGroup;
+			children = (
+				07E0BD16201C75FD00BE7E63 /* Fan.xcassets */,
+				07E0BD17201C75FD00BE7E63 /* FanView.swift */,
+			);
+			path = "Fan Button Animation";
+			sourceTree = "<group>";
+		};
+		0F4E09D43349090C22FCD083 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2E88B44C85A0BA75AA4ABE7D /* Pods_Smart_Home.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF1DE7C9715D6544E0DCE3B5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1FD3DE4B6BE2C5C2AAE296EB /* Pods-Smart Home.debug.xcconfig */,
+				A53681748452088C98862C87 /* Pods-Smart Home.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		077B10052000AFDE00456633 /* Smart Home */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 077B10182000AFDE00456633 /* Build configuration list for PBXNativeTarget "Smart Home" */;
+			buildPhases = (
+				DF9BE80A8D5AD779736F1DE8 /* [CP] Check Pods Manifest.lock */,
+				077B10022000AFDE00456633 /* Sources */,
+				077B10032000AFDE00456633 /* Frameworks */,
+				077B10042000AFDE00456633 /* Resources */,
+				77F54027FF62F9B53790B024 /* [CP] Embed Pods Frameworks */,
+				E745FD8DC870BC19ACA4F95F /* [CP] Copy Pods Resources */,
+				07A16AED202C0EE800FE7C55 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Smart Home";
+			productName = "Smart Home";
+			productReference = 077B10062000AFDE00456633 /* Smart Home.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		077B0FFE2000AFDE00456633 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Deep Gajera";
+				TargetAttributes = {
+					077B10052000AFDE00456633 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 077B10012000AFDE00456633 /* Build configuration list for PBXProject "Smart Home" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 077B0FFD2000AFDE00456633;
+			productRefGroup = 077B10072000AFDE00456633 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				077B10052000AFDE00456633 /* Smart Home */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		077B10042000AFDE00456633 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07920A532010A788000E6FD8 /* Nunito-Bold.ttf in Resources */,
+				07920A562010A788000E6FD8 /* Nunito-ExtraBoldItalic.ttf in Resources */,
+				077B10142000AFDE00456633 /* LaunchScreen.storyboard in Resources */,
+				07920A5D2010A788000E6FD8 /* Nunito-SemiBold.ttf in Resources */,
+				07920A542010A788000E6FD8 /* Nunito-BoldItalic.ttf in Resources */,
+				07E0BD18201C75FD00BE7E63 /* Fan.xcassets in Resources */,
+				07920A572010A788000E6FD8 /* Nunito-ExtraLight.ttf in Resources */,
+				07920A552010A788000E6FD8 /* Nunito-ExtraBold.ttf in Resources */,
+				07920A592010A788000E6FD8 /* Nunito-Italic.ttf in Resources */,
+				07920A522010A788000E6FD8 /* Nunito-BlackItalic.ttf in Resources */,
+				07E0BD0D201C751700BE7E63 /* Bulb.xcassets in Resources */,
+				07920A5F2010A788000E6FD8 /* OFL.txt in Resources */,
+				07920A5A2010A788000E6FD8 /* Nunito-Light.ttf in Resources */,
+				07920A582010A788000E6FD8 /* Nunito-ExtraLightItalic.ttf in Resources */,
+				071598DA201BB12B0012A540 /* SecurityButton.xcassets in Resources */,
+				07920A5C2010A788000E6FD8 /* Nunito-Regular.ttf in Resources */,
+				07920A5E2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf in Resources */,
+				07920A512010A788000E6FD8 /* Nunito-Black.ttf in Resources */,
+				077B10112000AFDE00456633 /* Assets.xcassets in Resources */,
+				077B101C2000C78100456633 /* Podfile in Resources */,
+				07A975A02010F0C500676A69 /* GoogleService-Info.plist in Resources */,
+				07920A5B2010A788000E6FD8 /* Nunito-LightItalic.ttf in Resources */,
+				077B100F2000AFDE00456633 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07A16AED202C0EE800FE7C55 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
+		};
+		77F54027FF62F9B53790B024 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Smart Home/Pods-Smart Home-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Smart Home/Pods-Smart Home-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF9BE80A8D5AD779736F1DE8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Smart Home-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E745FD8DC870BC19ACA4F95F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Smart Home/Pods-Smart Home-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		077B10022000AFDE00456633 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				076F04392023918F00806482 /* CUserTableViewCell.swift in Sources */,
+				071598DB201BB12B0012A540 /* SecurityButtonView.swift in Sources */,
+				076F0437202380FC00806482 /* TextInputViewController.swift in Sources */,
+				077BAEBF200FC12200118A73 /* NotificationViewController.swift in Sources */,
+				0786D3E52013426C00771CF0 /* Isolated Structs.swift in Sources */,
+				07920A672010B7AD000E6FD8 /* PaddedTextField.swift in Sources */,
+				07E0BD19201C75FD00BE7E63 /* FanView.swift in Sources */,
+				070F7E0F200FC6A7001BDD48 /* TabBarViewControler.swift in Sources */,
+				07920A612010ADB9000E6FD8 /* SignInViewController.swift in Sources */,
+				07D982762026EFF2001450BE /* AnimationViewProtocol.swift in Sources */,
+				077BAEBD200FBD1300118A73 /* ControllerViewController.swift in Sources */,
+				078F00EF201B22E400447A12 /* ApplianceCollectionViewCell.swift in Sources */,
+				0794F68720125911008968AD /* PassTextField.swift in Sources */,
+				07D982732026D6A0001450BE /* StatesManager.swift in Sources */,
+				07A9759E2010E2AD00676A69 /* UIView + Extentions.swift in Sources */,
+				0786D3E7201354CA00771CF0 /* GetControllerIDViewController.swift in Sources */,
+				07D9BB3F2019B7FA00390007 /* CreateNewAccountViewController.swift in Sources */,
+				07FF85D620261308001808BE /* FirebaseManager.swift in Sources */,
+				078466A12028A6E500786326 /* MessageView.swift in Sources */,
+				07A37E1E2029AD4E00A13D1D /* UsersListProvider.swift in Sources */,
+				077B100A2000AFDE00456633 /* AppDelegate.swift in Sources */,
+				0786D3E32013419D00771CF0 /* Enums.swift in Sources */,
+				07E0BD0E201C751700BE7E63 /* BulbView.swift in Sources */,
+				0784669F20286F9200786326 /* Reachability.swift in Sources */,
+				077BAEBB200FBAB300118A73 /* HomeViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		077B100D2000AFDE00456633 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				077B100E2000AFDE00456633 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		077B10122000AFDE00456633 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				077B10132000AFDE00456633 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		077B10162000AFDE00456633 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		077B10172000AFDE00456633 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		077B10192000AFDE00456633 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1FD3DE4B6BE2C5C2AAE296EB /* Pods-Smart Home.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 484WT6SZCB;
+				INFOPLIST_FILE = "Smart Home/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jumpstarters.Smart-Home";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		077B101A2000AFDE00456633 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A53681748452088C98862C87 /* Pods-Smart Home.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 484WT6SZCB;
+				INFOPLIST_FILE = "Smart Home/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jumpstarters.Smart-Home";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		077B10012000AFDE00456633 /* Build configuration list for PBXProject "Smart Home" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				077B10162000AFDE00456633 /* Debug */,
+				077B10172000AFDE00456633 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		077B10182000AFDE00456633 /* Build configuration list for PBXNativeTarget "Smart Home" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				077B10192000AFDE00456633 /* Debug */,
+				077B101A2000AFDE00456633 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 077B0FFE2000AFDE00456633 /* Project object */;
+}
