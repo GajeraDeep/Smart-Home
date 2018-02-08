@@ -44,9 +44,9 @@
 		07920A612010ADB9000E6FD8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07920A602010ADB9000E6FD8 /* SignInViewController.swift */; };
 		07920A672010B7AD000E6FD8 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07920A662010B7AD000E6FD8 /* PaddedTextField.swift */; };
 		0794F68720125911008968AD /* PassTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794F68620125911008968AD /* PassTextField.swift */; };
+		07A16AEF202C295800FE7C55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07A16AEE202C295800FE7C55 /* GoogleService-Info.plist */; };
 		07A37E1E2029AD4E00A13D1D /* UsersListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A37E1D2029AD4E00A13D1D /* UsersListProvider.swift */; };
 		07A9759E2010E2AD00676A69 /* UIView + Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9759D2010E2AD00676A69 /* UIView + Extentions.swift */; };
-		07A975A02010F0C500676A69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07A9759F2010F0C500676A69 /* GoogleService-Info.plist */; };
 		07D982732026D6A0001450BE /* StatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D982722026D6A0001450BE /* StatesManager.swift */; };
 		07D982762026EFF2001450BE /* AnimationViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D982752026EFF2001450BE /* AnimationViewProtocol.swift */; };
 		07D9BB3F2019B7FA00390007 /* CreateNewAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9BB3E2019B7FA00390007 /* CreateNewAccountViewController.swift */; };
@@ -98,9 +98,9 @@
 		07920A602010ADB9000E6FD8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		07920A662010B7AD000E6FD8 /* PaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
 		0794F68620125911008968AD /* PassTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassTextField.swift; sourceTree = "<group>"; };
+		07A16AEE202C295800FE7C55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		07A37E1D2029AD4E00A13D1D /* UsersListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListProvider.swift; sourceTree = "<group>"; };
 		07A9759D2010E2AD00676A69 /* UIView + Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extentions.swift"; sourceTree = "<group>"; };
-		07A9759F2010F0C500676A69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		07D982722026D6A0001450BE /* StatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesManager.swift; sourceTree = "<group>"; };
 		07D982752026EFF2001450BE /* AnimationViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewProtocol.swift; sourceTree = "<group>"; };
 		07D9BB3E2019B7FA00390007 /* CreateNewAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewAccountViewController.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 				077B10122000AFDE00456633 /* LaunchScreen.storyboard */,
 				077B101B2000C78100456633 /* Podfile */,
 				077B10152000AFDE00456633 /* Info.plist */,
-				07A9759F2010F0C500676A69 /* GoogleService-Info.plist */,
+				07A16AEE202C295800FE7C55 /* GoogleService-Info.plist */,
 				07920A412010A788000E6FD8 /* Nunito */,
 			);
 			path = "Smart Home";
@@ -363,8 +363,8 @@
 				07920A5E2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf in Resources */,
 				07920A512010A788000E6FD8 /* Nunito-Black.ttf in Resources */,
 				077B10112000AFDE00456633 /* Assets.xcassets in Resources */,
+				07A16AEF202C295800FE7C55 /* GoogleService-Info.plist in Resources */,
 				077B101C2000C78100456633 /* Podfile in Resources */,
-				07A975A02010F0C500676A69 /* GoogleService-Info.plist in Resources */,
 				07920A5B2010A788000E6FD8 /* Nunito-LightItalic.ttf in Resources */,
 				077B100F2000AFDE00456633 /* Main.storyboard in Resources */,
 			);
