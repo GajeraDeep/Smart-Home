@@ -30,6 +30,17 @@ enum ControllerAccessState: String {
     case denied = "Rejected Users"
     case waiting = "Waiting Users"
     case accepted = "Verified Users"
+    
+    var toInt: Int {
+        switch self {
+        case .accepted:
+            return 1
+        case .waiting:
+            return 0
+        case .denied:
+            return -1
+        }
+    }
 }
 
 enum Key {

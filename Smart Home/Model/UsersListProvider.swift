@@ -266,7 +266,9 @@ class UserList: NSObject {
             }
             
             Fire.shared.setData(modState ?? true, at: newPath, complitionHandler: { (success, _) in
-                complitionHandler(success)
+                Fire.shared.setData(newState.toInt, at: "users/\(user.uid)/accessState", complitionHandler: { (success, _) in
+                    complitionHandler(success)
+                })
             })
         })
     }
