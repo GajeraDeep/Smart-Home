@@ -37,14 +37,13 @@ enum InterfaceType {
     }
 }
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var securityButton: UIButton!
     @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var appliancesLabel: UILabel!
     @IBOutlet weak var securityStateLabel: UILabel!
-    @IBOutlet weak var messageView: MessageView!
     
     let appliances = AppliancesType.applianceArray
     
@@ -57,38 +56,13 @@ class HomeViewController: UIViewController {
         view.alpha = 0
         return view
     }()
-    
-    var hud: MBProgressHUD!
-    
-    var databaseConection: Bool? = nil {
-        willSet {
-            if newValue != databaseConection {
-                if let newVal = newValue, newVal {
-                    if messageView.isVisible {
-                        let bgColor = UIColor(red: 0, green: 179/255.0, blue: 0, alpha: 1)
-                        messageView.changeStillMessage("Back Online", color: bgColor, completionHandler: {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
-                                self.messageView.removeStillMessage()
-                            })
-                        })
-                    }
-                } else {
-                    if !messageView.isVisible {
-                        messageView.showStillMessage("No connection")
-                    }
-                }
-            }
-        }
-    }
-    
+
     var interfaceType: InterfaceType = .loading {
         willSet {
             switch newValue {
             case .loading:
                 self.fadeAndDissableViews(true)
-                hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-                hud.isUserInteractionEnabled = false
-                hud.label.text = "Loading.."
+                hud.show(animated: true)
                 
             case .normal:
                 if interfaceType == .secEnabled || interfaceType == .secAlert {
@@ -115,7 +89,7 @@ class HomeViewController: UIViewController {
                         self.bgImage.fadeIn()
                         
                         self.tabBarController?.tabBar.alpha = 0
-                        self.tabBarController?.selectedViewController = self
+                        self.tabBarController?.selectedViewController = self.navigationController
                         
                         self.securityButtonView.removeAllAnimations()
                     })
@@ -170,11 +144,11 @@ class HomeViewController: UIViewController {
         }
         
         let handler: (Bool) -> () = { state in
-            if self.databaseConection == nil, !Reachability.isConnectedToNetwork() {
+            if self.databaseConnection == nil, !Reachability.isConnectedToNetwork() {
                 self.interfaceType = .noInternetConnection
             } else {
                 if state == Reachability.isConnectedToNetwork() {
-                    self.databaseConection = state
+                    self.databaseConnection = state
                 }
             }
         }
@@ -184,12 +158,13 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         StatesManager.manager?.delegate = self
         
         if !((StatesManager.manager?.doesHandlerExist(forKeys: [.fan, .light])) ?? true) {
             StatesManager.manager?.startObservers(forKeys: [.fan, .light])
         }
+        
+        super.viewWillAppear(true)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -217,7 +192,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func securityButtonPressed(_ sender: UIButton) {
         if let allow = allowSecModifications, allow {
-            if let val = databaseConection, val {
+            if let val = databaseConnection, val {
                 if interfaceType == .normal {
                     if let present = isUserPresent {
                         if present {
@@ -244,12 +219,12 @@ class HomeViewController: UIViewController {
                 self.messageView.flashStillMessage()
             }
         } else {
-            let alert = UIAlertController(title: "Modifications denied..", message: "You don't have enough permissions to modify security state", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             
-            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-            
-            alert.addAction(ok)
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(withActions: [okAction],
+                           ofType: .alert,
+                           withMessage: ("Modifications denied..", "You don't have enough permissions to modify security state"),
+                           complitionHandler: nil)
         }
     }
     
@@ -271,68 +246,20 @@ class HomeViewController: UIViewController {
             message = "Your are trying to dissable alarms, are you sure?"
         }
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let ok = UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
+        let okAction = UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
             if let handler = successHandler {
                 handler()
             }
         })
         
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        
-        self.present(alert, animated: true, completion: nil)
+        self.showAlert(
+            withActions: [okAction, cancelAction],
+            ofType: .alert,
+            withMessage: (title, message),
+            complitionHandler: nil)
     }
-    
-    @IBAction func menuBarButtonPressed(_ sender: UIBarButtonItem) {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let logOut = UIAlertAction(title: "Log Out", style: .destructive) { _ in
-            do {
-                if let _ = Auth.auth().currentUser {
-                    
-                    Fire.shared.stopMainObservers()
-                    StatesManager.manager?.delegate = nil
-                    StatesManager.manager = nil
-                    
-                    try Auth.auth().signOut()
-                    
-                    let signInVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: StoryBoardIDs.signInVC.rawValue)
-                    signInVC.heroModalAnimationType = .slide(direction: .right)
-                    self.hero_replaceViewController(with: signInVC)
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        logOut.isEnabled = {
-            if let val = databaseConection {
-                return val
-            }
-            return false
-        }()
-        
-        actionSheet.addAction(logOut)
-        actionSheet.addAction(cancel)
-        
-        self.present(actionSheet, animated: true, completion: nil)
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -365,7 +292,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension HomeViewController: ApplianceCollectionViewCellDelegate {
     func applianceStateChangedTo(_ state: Bool, forAppliance appliance: AppliancesType) {
-        if let val = databaseConection, val {
+        if let val = databaseConnection, val {
             var key: Key
             
             switch appliance {

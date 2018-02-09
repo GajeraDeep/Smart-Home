@@ -8,9 +8,12 @@
 
 import UIKit
 import MBProgressHUD
+import Hero
 
 class TextInputViewController: UIViewController {
 
+    @IBOutlet weak var textFieldsStack: UIStackView!
+    
     var tapGesture: UITapGestureRecognizer!
     var whenLastTextFieldReturns: (() -> ())!
     
@@ -20,17 +23,12 @@ class TextInputViewController: UIViewController {
         super.viewDidLoad()
         addDismissKeyboardGesture()
     
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        hud = MBProgressHUD()
+        hud.isUserInteractionEnabled = false
+        
+        view.addSubview(hud)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func addDismissKeyboardGesture() {
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
         tapGesture.numberOfTapsRequired = 1
@@ -42,16 +40,34 @@ class TextInputViewController: UIViewController {
         view.endEditing(true)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func addTargetToFields() {
+        self.textFieldsStack.subviews.forEach { (view) in
+            if let textField = view as? UITextField {
+                textField.addTarget(self, action: #selector(self.editingChanged), for: .editingChanged)
+            }
+        }
     }
-    */
-
+    
+    @objc func editingChanged() {
+    }
+    
+    func showAuthenticationAlert(_ alert: AuthAlertType) {
+        hud.hide(animated: true)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        self.showAlert(withActions: [okAction], ofType: .alert, withMessage: (alert.title, alert.message), complitionHandler: nil)
+    }
+    
+    func getUnderlinedString(name: String, OfSize size: CGFloat, with color: UIColor)
+        -> NSMutableAttributedString {
+            let attrs: [NSAttributedStringKey: Any] = [
+                NSAttributedStringKey.font: UIFont(name: "Nunito-Regular", size: size)!,
+                NSAttributedStringKey.foregroundColor: color,
+                NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue
+            ]
+            
+            return NSMutableAttributedString(string: name, attributes: attrs)
+    }
 }
 
 extension TextInputViewController: UITextFieldDelegate {

@@ -123,7 +123,8 @@ class UserList: NSObject {
     }
     
     private func stopEditingTableView() {
-
+        self.tableView.isEditing = false
+        
         DispatchQueue.global(qos: .default).async {
             self.applyChanges { (succedded) in
                 if succedded {
@@ -143,7 +144,6 @@ class UserList: NSObject {
                         self.previuosUids = []
                         
                         self.nonVerUserFillProgress = 0
-                        self.tableView.isEditing = false
                         self.startObserver()
                     }
                 }
@@ -423,6 +423,7 @@ extension UserList: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         let headerView : UIView = {
             if enableEditing {
                 return UIView(frame: CGRect(origin: .zero, size: CGSize(width: 375, height: 40)))
@@ -529,8 +530,46 @@ extension UserList: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        return view
+        
+        if let users = usersDict[keysArray[section]] {
+            if users.isEmpty {
+                let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 375, height: 45)))
+                
+                let label = UILabel(frame: .zero)
+                label.font = label.font.withSize(15)
+                label.textColor = UIColor(red: 9/255.0, green: 52/255.0, blue: 77/255.0, alpha: 0.4)
+                label.text = "No user data"
+                label.sizeToFit()
+                
+                view.addSubview(label)
+                label.recenter()
+                
+                return view
+            }
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if let  users = usersDict[keysArray[section]] {
+            if users.isEmpty {
+                return 45
+            }
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.2 * indexPath.row.toDouble()) {
+            cell.alpha = 1
+        }
+    }
+}
+
+extension Int  {
+    func toDouble() -> Double {
+        return Double(self)
     }
 }
 

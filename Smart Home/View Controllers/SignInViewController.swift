@@ -10,6 +10,48 @@ import UIKit
 import Firebase
 import MBProgressHUD
 
+enum AuthAlertType {
+    case noInternetAccess
+    case recordsDoesNotMatch
+    case invalidEmail
+    case undefined
+    case toManyRequests
+    case emailUsed
+    case weakPasword
+    
+    var title: String {
+        switch self {
+        case .noInternetAccess:
+            return "No internt access"
+        case .invalidEmail, .recordsDoesNotMatch, .emailUsed, .weakPasword:
+            return "Please try again..."
+        case .toManyRequests:
+            return "Please try later..."
+        case .undefined:
+            return "Unknown error"
+        }
+    }
+    
+    var message: String {
+        switch self {
+        case .noInternetAccess:
+            return "There seems to be no internet connection. Please check your connection and try again."
+        case .invalidEmail:
+            return "Email address seems invalid. Please check and try again."
+        case .recordsDoesNotMatch:
+            return "Username or password doesnot match our records. Please re-check and try again."
+        case .emailUsed:
+            return "Email already in used. Please try another one."
+        case .weakPasword:
+            return "Your password is not strong enough. Please enter stronger one."
+        case .toManyRequests:
+            return "To many requests from your device. Please try later."
+        case .undefined:
+            return "Unknown error has occured."
+        }
+    }
+}
+
 class SignInViewController: TextInputViewController {
 
     @IBOutlet weak var emailTextField: PaddedTextField!
@@ -23,7 +65,7 @@ class SignInViewController: TextInputViewController {
         emailTextField.delegate = self
         passTextField.delegate = self
         
-        transitToSignUpVCButton.setAttributedTitle(AttributedString.getUnderlinedString(name: "Sign Up", OfSize: 14, with: Colors.attribtedString.color), for: UIControlState.normal)
+        transitToSignUpVCButton.setAttributedTitle(self.getUnderlinedString(name: "Sign Up", OfSize: 14, with: Colors.attribtedString.color), for: UIControlState.normal)
         
         addTargetToFields()
         
@@ -47,9 +89,8 @@ class SignInViewController: TextInputViewController {
     
     @IBAction func performSignIn(_ sender: UIButton) {
         self.view.endEditing(true)
-        hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.isUserInteractionEnabled = false
         hud.label.text = "Authorizing.."
+        hud.show(animated: true)
         
         if let pass = self.passTextField.text, !pass.isEmpty,
             let email = self.emailTextField.text, !email.isEmpty {
@@ -57,15 +98,15 @@ class SignInViewController: TextInputViewController {
                 if err != nil, let errCode = AuthErrorCode(rawValue: err!._code) {
                     switch errCode {
                     case .networkError:
-                        self.show(alert: .noInternetAccess)
+                        self.showAuthenticationAlert(.noInternetAccess)
                     case .invalidEmail:
-                        self.show(alert: .invalidEmail)
+                        self.showAuthenticationAlert(.invalidEmail)
                     case .wrongPassword, .userNotFound:
-                        self.show(alert: .recordsDoesNotMatch)
+                        self.showAuthenticationAlert(.recordsDoesNotMatch)
                     case .operationNotAllowed:
-                        self.show(alert: .toManyRequests)
+                        self.showAuthenticationAlert(.toManyRequests)
                     default:
-                        self.show(alert: .undefined)
+                        self.showAuthenticationAlert(.undefined)
                     }
                 } else {
                     
@@ -73,7 +114,6 @@ class SignInViewController: TextInputViewController {
                     tabbarVC.heroModalAnimationType = .slide(direction: .left)
                     DispatchQueue.main.async {
                         self.hud.hide(animated: true)
-                        self.hud.label.text = nil
                     }
                     self.hero_replaceViewController(with: tabbarVC)
                 }
@@ -87,41 +127,7 @@ class SignInViewController: TextInputViewController {
         self.hero_replaceViewController(with: createAccountVC)
     }
     
-    
-    
-    func addTargetToFields() {
-        emailTextField.addTarget(self, action: #selector(self.editingChanged(_:)), for: .editingChanged)
-        passTextField.addTarget(self, action: #selector(self.editingChanged(_:)), for: .editingChanged)
-    }
-    
-    func show(alert: AuthAlertType) {
-        hud.hide(animated: true)
-        let alertView = UIAlertController(title: alert.title, message: alert.message, preferredStyle: UIAlertControllerStyle.alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        
-        self.present(alertView, animated: true, completion: nil)
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-}
-
-extension SignInViewController {
-
-    override func textFieldDidEndEditing(_ textField: UITextField) {
-        super.textFieldDidEndEditing(textField)
-        passTextField.passVisible = false
-    }
-    
-    @objc func editingChanged(_ textField: UITextField) {
+    override func editingChanged() {
         guard let email = emailTextField.text, !email.isEmpty,
             let pass = passTextField.text, !pass.isEmpty else {
                 signInButton.isEnabled = false
@@ -130,6 +136,14 @@ extension SignInViewController {
         }
         signInButton.isEnabled = true
         signInButton.alpha = 1
+    }
+}
+
+extension SignInViewController {
+
+    override func textFieldDidEndEditing(_ textField: UITextField) {
+        super.textFieldDidEndEditing(textField)
+        passTextField.passVisible = false
     }
 }
 

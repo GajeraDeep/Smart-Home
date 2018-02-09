@@ -136,7 +136,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Controller" id="VbI-iD-0uH"/>
                     <connections>
-                        <outlet property="messageView" destination="G9g-Lo-Nik" id="7Ji-uz-FEs"/>
+                        <outlet property="messageView" destination="G9g-Lo-Nik" id="yAD-yQ-ePX"/>
                         <outlet property="tableView" destination="REx-UL-PgW" id="umt-jG-7JB"/>
                     </connections>
                 </viewController>
@@ -297,6 +297,7 @@
                     </view>
                     <connections>
                         <outlet property="doneBarItem" destination="Z5c-xf-ase" id="Ugb-xs-t6t"/>
+                        <outlet property="textFieldsStack" destination="OEF-8b-NmR" id="r1q-TN-uCX"/>
                         <outletCollection property="idTextFieldCollection" destination="Z8t-gv-DVW" collectionClass="NSMutableArray" id="Lyt-Jp-eM4"/>
                         <outletCollection property="idTextFieldCollection" destination="aea-yi-zM8" collectionClass="NSMutableArray" id="9cy-Aw-D39"/>
                         <outletCollection property="idTextFieldCollection" destination="VoT-eW-VxY" collectionClass="NSMutableArray" id="lQM-V0-P07"/>
@@ -419,18 +420,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="F9H-Jw-1xh"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="OX9-yi-ETT">
-                        <barButtonItem key="rightBarButtonItem" image="menu" id="QS2-C2-Ub7">
-                            <connections>
-                                <action selector="menuBarButtonPressed:" destination="0Eb-ZT-tPc" id="DWj-KW-Pcc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Home" id="OX9-yi-ETT"/>
                     <connections>
                         <outlet property="appliancesLabel" destination="H3D-gw-0jU" id="bqH-uw-QVb"/>
                         <outlet property="bgImage" destination="2SF-ys-6c8" id="Qhd-L7-J6h"/>
                         <outlet property="collectionView" destination="gaK-aR-2lQ" id="aV1-4h-OsN"/>
-                        <outlet property="messageView" destination="xYQ-yV-kwC" id="rSD-2L-o0B"/>
+                        <outlet property="messageView" destination="xYQ-yV-kwC" id="hzc-V7-0X8"/>
                         <outlet property="securityButton" destination="6zv-VW-W0X" id="RIz-Rz-QPi"/>
                         <outlet property="securityStateLabel" destination="Af9-Ib-Ryl" id="cYU-lV-nRm"/>
                     </connections>
@@ -565,6 +560,7 @@
                         <outlet property="emailTextField" destination="6dK-z8-9ek" id="Jqh-iu-pAc"/>
                         <outlet property="passTextField" destination="nt1-NB-bY5" id="UcI-xM-JxX"/>
                         <outlet property="signInButton" destination="6w3-rA-ufW" id="esm-xL-0Tc"/>
+                        <outlet property="textFieldsStack" destination="bYA-yp-Och" id="ZZb-hL-aF7"/>
                         <outlet property="transitToSignUpVCButton" destination="jm0-A1-xff" id="mLY-bd-ypR"/>
                     </connections>
                 </viewController>
@@ -704,6 +700,7 @@
                         <outlet property="emailTextField" destination="m2D-Bf-VV4" id="FUO-wg-B6h"/>
                         <outlet property="passTextField" destination="z6g-V9-Ub3" id="axL-8h-eSS"/>
                         <outlet property="signupButton" destination="LYS-YU-scA" id="AYk-Eu-nMZ"/>
+                        <outlet property="textFieldsStack" destination="7Qd-Ar-Chu" id="8u1-TS-yQl"/>
                         <outlet property="transitToSignInVCButton" destination="I8e-4B-MRV" id="Lig-xd-Rax"/>
                         <outlet property="userNameTextField" destination="31X-PS-Uyx" id="WCN-Wa-EwD"/>
                     </connections>
@@ -785,7 +782,6 @@
         <image name="done_bar_but_dimmed" width="60" height="33"/>
         <image name="home_selected" width="23" height="23"/>
         <image name="home_unselected" width="23" height="23"/>
-        <image name="menu" width="5" height="20"/>
         <image name="registerVCBG" width="375" height="667"/>
         <image name="signinVCBG" width="375" height="667"/>
     </resources>

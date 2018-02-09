@@ -17,9 +17,9 @@ class Fire {
     
     var connChangeshandlers: [((_ state: Bool) -> ())] = [] {
         didSet {
-            if let state = connState, !state {
+            if let state = connState {
                 connChangeshandlers.forEach({ (handler) in
-                    handler(false)
+                    handler(state)
                 })
             }
         }

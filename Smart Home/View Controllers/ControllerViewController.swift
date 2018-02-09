@@ -8,45 +8,26 @@
 
 import UIKit
 import MBProgressHUD
+import LocalAuthentication
 
-class ControllerViewController: UIViewController {
+class ControllerViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var messageView: MessageView!
-    
-    var hud: MBProgressHUD!
     
     var userListProvider: UserList!
     
-    var databaseConection: Bool? = nil {
-        willSet {
-            if newValue != databaseConection {
-                if let newVal = newValue, newVal {
-                    if messageView.isVisible {
-                        let bgColor = UIColor(red: 0, green: 179/255.0, blue: 0, alpha: 1)
-                        messageView.changeStillMessage("Back Online", color: bgColor, completionHandler: {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
-                                self.messageView.removeStillMessage()
-                            })
-                        })
-                    }
-                } else {
-                    if !messageView.isVisible {
-                        messageView.showStillMessage("No connection")
-                    }
-                    hud.hide(animated: true)
-                }
+    override var databaseConnection: Bool? {
+        didSet {
+            super.databaseConnection = databaseConnection
+            if databaseConnection != oldValue {
+                databaseConnection! ? userListProvider.startObserver() : userListProvider.removeObserver()
             }
         }
-    } 
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hud = MBProgressHUD.init()
-        hud.label.text = "Loading.."
-        
-        self.view.addSubview(hud)
         hud.show(animated: true)
         
         userListProvider = UserList(CID: Fire.shared.myCID!, tableView: self.tableView)
@@ -60,12 +41,12 @@ class ControllerViewController: UIViewController {
         
         self.messageView.initMessage()
         
-        let handler: (Bool) -> () = { state in
+        let connHandler: (Bool) -> () = { state in
             if state == Reachability.isConnectedToNetwork() {
-                self.databaseConection = state
+                self.databaseConnection = state
             }
         }
-        Fire.shared.connChangeshandlers.append(handler)
+        Fire.shared.connChangeshandlers.append(connHandler)
         
         if let isHead = StatesManager.manager?.isUserHead, isHead {
             setEditBarButtonItem()
@@ -88,18 +69,50 @@ class ControllerViewController: UIViewController {
     }
     
     @objc func editBarItemPressed(_ sender: UIBarButtonItem) {
-        if self.userListProvider.enableEditing {
-            hud.label.text = "Syncing.."
-            hud.show(animated: true)
-            
-            self.userListProvider.enableEditing = false
-            self.navigationItem.leftBarButtonItem?.title = "Edit"
+        if messageView.isVisible {
+            messageView.flashStillMessage()
         } else {
-            hud.label.text = "Fetching.."
-            hud.show(animated: true)
+            if self.userListProvider.enableEditing {
+                hud.label.text = "Syncing.."
+                hud.show(animated: true)
+                
+                self.userListProvider.enableEditing = false
+                self.navigationItem.leftBarButtonItem?.title = "Edit"
+            } else {
+                authenticateUser()
+            }
+        }
+    }
+    
+    func authenticateUser() {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Please identify yourself!"
+            
+            context.evaluatePolicy(LAPolicy.deviceOwnerAuthentication, localizedReason: reason) {
+                [unowned self] success, error in
+                DispatchQueue.main.async {
+                    guard success else {
+                        return
+                    }
+                    self.hud.label.text = "Fetching.."
+                    self.hud.show(animated: true)
+                    
+                    self.userListProvider.enableEditing = true
+                    self.navigationItem.leftBarButtonItem?.title = "Done"
+                }
+            }
+        } else {
+            if error?.code == LAError.biometryLockout.rawValue {
 
-            self.userListProvider.enableEditing = true
-            self.navigationItem.leftBarButtonItem?.title = "Done"
+                let okAction = UIAlertAction(title: "OK", style: .default)
+                self.showAlert(withActions: [okAction],
+                               ofType: .alert,
+                               withMessage: ("Touch ID not available..", "Failed authentication too may times, restart phone to proceed further."),
+                               complitionHandler: nil)
+            }
         }
     }
 }
@@ -107,7 +120,6 @@ class ControllerViewController: UIViewController {
 extension ControllerViewController: UserListDelegate {
     func showHUD(_ show: Bool, withString label: String?) {
         if show {
-    
             if let label = label {
                 self.hud.label.text = label
             }

@@ -38,6 +38,8 @@ enum Key {
     case security
     case contAccess
     case allowSecMod
+    
+    static var allKeys: [Key] = [ .contAccess, .light, .fan, .security, .allowSecMod]
 }
 
 protocol StatesManagerProtocol {
@@ -106,7 +108,9 @@ class StatesManager {
                 fan = nil
                 light = nil
             } else {
-                startObservers(forKeys: [.fan, .light, .security, .allowSecMod])
+                if !doesHandlerExist(forKeys: [.light]) {
+                    startObservers(forKeys: [.fan, .light, .security, .allowSecMod])
+                }
             }
         }
     }
@@ -164,7 +168,7 @@ class StatesManager {
     }
     
     deinit {
-        removeObservers(forKeys: [.contAccess, .allowSecMod, .fan, .light, .security])
+        removeObservers(forKeys: Key.allKeys)
     }
     
     static func initManager(uid: String, cid: String) {
@@ -301,6 +305,7 @@ class StatesManager {
                     allowSecChangesPath.removeObserver(withHandle: handler)
                 }
             }
+            handlers[key] = nil
         }
     }
 }

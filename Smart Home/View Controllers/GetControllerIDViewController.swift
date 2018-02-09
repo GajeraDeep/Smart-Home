@@ -43,9 +43,7 @@ class GetControllerIDViewController: TextInputViewController {
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Are you sure?", message: "You are trying to stop account creation in middle, are you sure?", preferredStyle: .alert)
-        
-        let yes = UIAlertAction(title: "Yes", style: .destructive) { (action) in
+        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
             Auth.auth().currentUser?.delete(completion: { (error) in
                 if error != nil {
                     print(error?.localizedDescription ?? "Error deleting user account")
@@ -57,15 +55,16 @@ class GetControllerIDViewController: TextInputViewController {
             self.hero_replaceViewController(with: createAccountVC)
         }
         
-        let no = UIAlertAction(title: "No", style: .cancel, handler: nil)
-        
-        alert.addAction(yes)
-        alert.addAction(no)
-        
-        self.present(alert, animated: true, completion: nil)
+        let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+
+        self.showAlert(
+            withActions: [yesAction, noAction],
+            ofType: .alert,
+            withMessage: ("Are you sure?", "You are trying to stop account creation in middle, are you sure?"),
+            complitionHandler: nil)
     }
 
-    func addNextButtonOnKeyboardFor(_ textField: UITextField) {
+    fileprivate func addNextButtonOnKeyboardFor(_ textField: UITextField) {
         let toolBar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         toolBar.barStyle = .default
         let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -87,7 +86,7 @@ class GetControllerIDViewController: TextInputViewController {
         }()
     }
     
-    func setBarButtonVisiblityTo(_ visible: Bool,for textField: UITextField, with tag: Int) {
+    fileprivate func setBarButtonVisiblityTo(_ visible: Bool,for textField: UITextField, with tag: Int) {
         if let toolbar = textField.inputAccessoryView as? UIToolbar {
             let barButton = toolbar.items?.last
             barButton?.image = tag < 3 ? (visible ? #imageLiteral(resourceName: "next_bar_but"):#imageLiteral(resourceName: "next_bar_but_dimmed")) : (visible ? #imageLiteral(resourceName: "done_bar_but"):#imageLiteral(resourceName: "done_bar_but_dimmed"))
@@ -139,10 +138,10 @@ class GetControllerIDViewController: TextInputViewController {
     
     @objc func processControllerID() {
         self.view.endEditing(true)
-        hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        hud.isUserInteractionEnabled = false
-        hud.label.text = "Verifying.."
 
+        hud.label.text = "Verifying.."
+        hud.show(animated: true)
+        
         let cid = self.combinedControllerID()
         
         let cidPath = "C_list/\(cid)"
@@ -186,49 +185,44 @@ class GetControllerIDViewController: TextInputViewController {
             }
             else {
                 self.hud.hide(animated: true)
-                let alert = UIAlertController(title: "ID dosn't match..", message: "ID you entered doesnot match our database please re-check and try again.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                self.showAlert(
+                    withActions: [okAction],
+                    ofType: .alert,
+                    withMessage: ("ID dosn't match..", "ID you entered doesnot match our database please re-check and try again."),
+                    complitionHandler: nil)
             }
         }
     }
     
     func doesUserWantToBeHead(complitionHandler: @escaping (Bool) -> ()) {
-
-        let alert = UIAlertController(title: "No Head", message: "No head is present for your controller ID, do you want to be head?", preferredStyle: .alert)
-    
-        let ok = UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) in
             complitionHandler(true)
         })
         
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            
-            let wait = UIAlertAction(title: "Wait", style: .destructive) { _ in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            let waitAction = UIAlertAction(title: "Wait", style: .destructive) { _ in
                 complitionHandler(false)
             }
-            
-            let becomeHead = UIAlertAction(title: "Become head", style: .default) {
+            let becomeHeadAction = UIAlertAction(title: "Become head", style: .default) {
                 _ in
                 complitionHandler(true)
             }
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            
-            actionSheet.addAction(becomeHead)
-            actionSheet.addAction(wait)
-            actionSheet.addAction(cancel)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             
             self.hud.hide(animated: true)
-            self.present(actionSheet, animated: true, completion: nil)
+            
+            self.showAlert(withActions: [waitAction, becomeHeadAction, cancelAction], ofType: .actionSheet, withMessage: (nil, nil), complitionHandler: nil)
             
         })
         
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        
         self.hud.hide(animated: true)
-        self.present(alert, animated: true, completion: nil)
+        
+        self.showAlert(withActions: [okAction, cancelAction],
+                       ofType: .alert,
+                       withMessage: ("No Head", "No head is present for your controller ID, do you want to be head?"),
+                       complitionHandler: nil)
     }
     
     func combinedControllerID() -> String {
