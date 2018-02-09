@@ -25,21 +25,10 @@
 		0786D3E32013419D00771CF0 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786D3E22013419D00771CF0 /* Enums.swift */; };
 		0786D3E7201354CA00771CF0 /* GetControllerIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786D3E6201354CA00771CF0 /* GetControllerIDViewController.swift */; };
 		078F00EF201B22E400447A12 /* ApplianceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078F00EE201B22E400447A12 /* ApplianceCollectionViewCell.swift */; };
-		07920A512010A788000E6FD8 /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A422010A788000E6FD8 /* Nunito-Black.ttf */; };
-		07920A522010A788000E6FD8 /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A432010A788000E6FD8 /* Nunito-BlackItalic.ttf */; };
 		07920A532010A788000E6FD8 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A442010A788000E6FD8 /* Nunito-Bold.ttf */; };
-		07920A542010A788000E6FD8 /* Nunito-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A452010A788000E6FD8 /* Nunito-BoldItalic.ttf */; };
 		07920A552010A788000E6FD8 /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A462010A788000E6FD8 /* Nunito-ExtraBold.ttf */; };
-		07920A562010A788000E6FD8 /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A472010A788000E6FD8 /* Nunito-ExtraBoldItalic.ttf */; };
-		07920A572010A788000E6FD8 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A482010A788000E6FD8 /* Nunito-ExtraLight.ttf */; };
-		07920A582010A788000E6FD8 /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A492010A788000E6FD8 /* Nunito-ExtraLightItalic.ttf */; };
-		07920A592010A788000E6FD8 /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4A2010A788000E6FD8 /* Nunito-Italic.ttf */; };
-		07920A5A2010A788000E6FD8 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4B2010A788000E6FD8 /* Nunito-Light.ttf */; };
-		07920A5B2010A788000E6FD8 /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4C2010A788000E6FD8 /* Nunito-LightItalic.ttf */; };
 		07920A5C2010A788000E6FD8 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4D2010A788000E6FD8 /* Nunito-Regular.ttf */; };
 		07920A5D2010A788000E6FD8 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4E2010A788000E6FD8 /* Nunito-SemiBold.ttf */; };
-		07920A5E2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07920A4F2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf */; };
-		07920A5F2010A788000E6FD8 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07920A502010A788000E6FD8 /* OFL.txt */; };
 		07920A612010ADB9000E6FD8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07920A602010ADB9000E6FD8 /* SignInViewController.swift */; };
 		07920A672010B7AD000E6FD8 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07920A662010B7AD000E6FD8 /* PaddedTextField.swift */; };
 		0794F68720125911008968AD /* PassTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794F68620125911008968AD /* PassTextField.swift */; };
@@ -47,6 +36,7 @@
 		07A37E1E2029AD4E00A13D1D /* UsersListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A37E1D2029AD4E00A13D1D /* UsersListProvider.swift */; };
 		07A9759E2010E2AD00676A69 /* UIView + Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9759D2010E2AD00676A69 /* UIView + Extentions.swift */; };
 		07D619DE202D5EB500B008DB /* BaseViewConteoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D619DD202D5EB500B008DB /* BaseViewConteoller.swift */; };
+		07D619E0202D8B8C00B008DB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07D619DF202D8B8B00B008DB /* Info.plist */; };
 		07D982732026D6A0001450BE /* StatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D982722026D6A0001450BE /* StatesManager.swift */; };
 		07D982762026EFF2001450BE /* AnimationViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D982752026EFF2001450BE /* AnimationViewProtocol.swift */; };
 		07D9BB3F2019B7FA00390007 /* CreateNewAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9BB3E2019B7FA00390007 /* CreateNewAccountViewController.swift */; };
@@ -69,7 +59,6 @@
 		077B100E2000AFDE00456633 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		077B10102000AFDE00456633 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		077B10132000AFDE00456633 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		077B10152000AFDE00456633 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		077B101B2000C78100456633 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		077BAEBA200FBAB300118A73 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		077BAEBC200FBD1300118A73 /* ControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerViewController.swift; sourceTree = "<group>"; };
@@ -79,21 +68,10 @@
 		0786D3E22013419D00771CF0 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		0786D3E6201354CA00771CF0 /* GetControllerIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetControllerIDViewController.swift; sourceTree = "<group>"; };
 		078F00EE201B22E400447A12 /* ApplianceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplianceCollectionViewCell.swift; sourceTree = "<group>"; };
-		07920A422010A788000E6FD8 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
-		07920A432010A788000E6FD8 /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
 		07920A442010A788000E6FD8 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
-		07920A452010A788000E6FD8 /* Nunito-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BoldItalic.ttf"; sourceTree = "<group>"; };
 		07920A462010A788000E6FD8 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
-		07920A472010A788000E6FD8 /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		07920A482010A788000E6FD8 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
-		07920A492010A788000E6FD8 /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		07920A4A2010A788000E6FD8 /* Nunito-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic.ttf"; sourceTree = "<group>"; };
-		07920A4B2010A788000E6FD8 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Light.ttf"; sourceTree = "<group>"; };
-		07920A4C2010A788000E6FD8 /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-LightItalic.ttf"; sourceTree = "<group>"; };
 		07920A4D2010A788000E6FD8 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		07920A4E2010A788000E6FD8 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
-		07920A4F2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		07920A502010A788000E6FD8 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		07920A602010ADB9000E6FD8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		07920A662010B7AD000E6FD8 /* PaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
 		0794F68620125911008968AD /* PassTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassTextField.swift; sourceTree = "<group>"; };
@@ -101,6 +79,7 @@
 		07A37E1D2029AD4E00A13D1D /* UsersListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListProvider.swift; sourceTree = "<group>"; };
 		07A9759D2010E2AD00676A69 /* UIView + Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extentions.swift"; sourceTree = "<group>"; };
 		07D619DD202D5EB500B008DB /* BaseViewConteoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewConteoller.swift; sourceTree = "<group>"; };
+		07D619DF202D8B8B00B008DB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07D982722026D6A0001450BE /* StatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesManager.swift; sourceTree = "<group>"; };
 		07D982752026EFF2001450BE /* AnimationViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewProtocol.swift; sourceTree = "<group>"; };
 		07D9BB3E2019B7FA00390007 /* CreateNewAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewAccountViewController.swift; sourceTree = "<group>"; };
@@ -164,8 +143,8 @@
 				077B10102000AFDE00456633 /* Assets.xcassets */,
 				077B10122000AFDE00456633 /* LaunchScreen.storyboard */,
 				077B101B2000C78100456633 /* Podfile */,
-				077B10152000AFDE00456633 /* Info.plist */,
 				07A16AEE202C295800FE7C55 /* GoogleService-Info.plist */,
+				07D619DF202D8B8B00B008DB /* Info.plist */,
 				07920A412010A788000E6FD8 /* Nunito */,
 			);
 			path = "Smart Home";
@@ -174,21 +153,10 @@
 		07920A412010A788000E6FD8 /* Nunito */ = {
 			isa = PBXGroup;
 			children = (
-				07920A422010A788000E6FD8 /* Nunito-Black.ttf */,
-				07920A432010A788000E6FD8 /* Nunito-BlackItalic.ttf */,
 				07920A442010A788000E6FD8 /* Nunito-Bold.ttf */,
-				07920A452010A788000E6FD8 /* Nunito-BoldItalic.ttf */,
 				07920A462010A788000E6FD8 /* Nunito-ExtraBold.ttf */,
-				07920A472010A788000E6FD8 /* Nunito-ExtraBoldItalic.ttf */,
-				07920A482010A788000E6FD8 /* Nunito-ExtraLight.ttf */,
-				07920A492010A788000E6FD8 /* Nunito-ExtraLightItalic.ttf */,
-				07920A4A2010A788000E6FD8 /* Nunito-Italic.ttf */,
-				07920A4B2010A788000E6FD8 /* Nunito-Light.ttf */,
-				07920A4C2010A788000E6FD8 /* Nunito-LightItalic.ttf */,
 				07920A4D2010A788000E6FD8 /* Nunito-Regular.ttf */,
 				07920A4E2010A788000E6FD8 /* Nunito-SemiBold.ttf */,
-				07920A4F2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf */,
-				07920A502010A788000E6FD8 /* OFL.txt */,
 			);
 			path = Nunito;
 			sourceTree = "<group>";
@@ -345,27 +313,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				07920A532010A788000E6FD8 /* Nunito-Bold.ttf in Resources */,
-				07920A562010A788000E6FD8 /* Nunito-ExtraBoldItalic.ttf in Resources */,
 				077B10142000AFDE00456633 /* LaunchScreen.storyboard in Resources */,
 				07920A5D2010A788000E6FD8 /* Nunito-SemiBold.ttf in Resources */,
-				07920A542010A788000E6FD8 /* Nunito-BoldItalic.ttf in Resources */,
 				07E0BD18201C75FD00BE7E63 /* Fan.xcassets in Resources */,
-				07920A572010A788000E6FD8 /* Nunito-ExtraLight.ttf in Resources */,
 				07920A552010A788000E6FD8 /* Nunito-ExtraBold.ttf in Resources */,
-				07920A592010A788000E6FD8 /* Nunito-Italic.ttf in Resources */,
-				07920A522010A788000E6FD8 /* Nunito-BlackItalic.ttf in Resources */,
 				07E0BD0D201C751700BE7E63 /* Bulb.xcassets in Resources */,
-				07920A5F2010A788000E6FD8 /* OFL.txt in Resources */,
-				07920A5A2010A788000E6FD8 /* Nunito-Light.ttf in Resources */,
-				07920A582010A788000E6FD8 /* Nunito-ExtraLightItalic.ttf in Resources */,
+				07D619E0202D8B8C00B008DB /* Info.plist in Resources */,
 				071598DA201BB12B0012A540 /* SecurityButton.xcassets in Resources */,
 				07920A5C2010A788000E6FD8 /* Nunito-Regular.ttf in Resources */,
-				07920A5E2010A788000E6FD8 /* Nunito-SemiBoldItalic.ttf in Resources */,
-				07920A512010A788000E6FD8 /* Nunito-Black.ttf in Resources */,
 				077B10112000AFDE00456633 /* Assets.xcassets in Resources */,
 				07A16AEF202C295800FE7C55 /* GoogleService-Info.plist in Resources */,
 				077B101C2000C78100456633 /* Podfile in Resources */,
-				07920A5B2010A788000E6FD8 /* Nunito-LightItalic.ttf in Resources */,
 				077B100F2000AFDE00456633 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
