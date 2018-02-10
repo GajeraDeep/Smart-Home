@@ -10,44 +10,9 @@ import UIKit
 import Firebase
 import MBProgressHUD
 
-enum CUserType {
-    case normal
-    case head
-    case me
-    case meAndHead
-}
-
-class CUser: Comparable {
-    var name: String
-    var uid: String
-    var type: CUserType
-    var allowSecMod: Bool?
-    
-    var userIsModified: Bool?
-    var initialAccessState: ControllerAccessState?
-    
-    init(name: String, uid: String) {
-        self.name = name
-        self.uid = uid
-        self.type = .normal
-    }
-    
-    static func <(lhs: CUser, rhs: CUser) -> Bool {
-        return lhs.name < rhs.name
-    }
-    
-    static func ==(lhs: CUser, rhs: CUser) -> Bool {
-        return lhs.uid == rhs.uid
-    }
-}
-
-
-
 protocol UserListDelegate {
     func showHUD(_ show: Bool, withString label: String?)
 }
-
-
 
 class UserList: NSObject {
     
@@ -70,18 +35,6 @@ class UserList: NSObject {
         ]
         return dict
     }()
-    
-    private var nonVerUserFillProgress: Int = 0 {
-        didSet {
-            if nonVerUserFillProgress == 100 {
-                DispatchQueue.main.async {
-                    self.delegate?.showHUD(false, withString: nil)
-                    self.tableView.reloadData()
-                    self.tableView.isEditing = true
-                }
-            }
-        }
-    }
     
     var enableEditing = false {
         didSet {
@@ -142,8 +95,6 @@ class UserList: NSObject {
                         self.usersDict[.accepted] = []
                         
                         self.previuosUids = []
-                        
-                        self.nonVerUserFillProgress = 0
                         self.startObserver()
                     }
                 }
@@ -151,44 +102,55 @@ class UserList: NSObject {
         }
     }
     
-    private func getCUser(_ uid: String, withState modState: Bool?, complitionHandler: @escaping (_ cUser: CUser?) -> () ) {
-        Fire.shared.doesDataExist(at: "users/\(uid)") { (doesExist, data) in
-            if doesExist {
-                if let dict = data as? NSDictionary {
-                    if let name = dict["name"] as? String {
-                        let user = CUser(name: name, uid: uid)
-                        
-                        if let isHead = dict["isHead"] as? Int, isHead == 1 {
-                            if Fire.shared.myUID == uid {
-                                user.type = .meAndHead
-                            } else {
-                                user.type = .head
-                            }
-                        } else if uid == Fire.shared.myUID {
-                            user.type = .me
-                        }
-                        if let state = modState {
-                            user.allowSecMod = state
-                        }
-                        complitionHandler(user)
+    private func fillNonVerifiedUsers() {
+        var progress: Int = 0 {
+            didSet {
+                if progress == 100 {
+                    DispatchQueue.main.async {
+                        self.delegate?.showHUD(false, withString: nil)
+                        self.tableView.reloadData()
+                        self.tableView.isEditing = true
                     }
                 }
-            } else {
-                complitionHandler(nil)
             }
         }
-    }
-    
-    private func getUIDs(_ path: String, complitionHandler: @escaping (Bool,[String]) -> ()) {
-        Fire.shared.doesDataExist(at: path) { (doesExists, data) in
-            if doesExists {
-                if let dict = data as? NSDictionary {
-                    if let keys = dict.allKeys as? [String] {
-                        complitionHandler(true,keys)
-                    }
+        var rejectedUsers = [CUser]()
+        getUIDs(rejectedUserPath) { (exists, uids) in
+            if exists, uids != [] {
+                for uid in uids {
+                    self.getCUser(uid, withState: nil, complitionHandler: { (user) in
+                        if let usr = user {
+                            rejectedUsers.append(usr)
+                        }
+                        if rejectedUsers.count == uids.count {
+                            rejectedUsers.sort(by: < )
+                            self.usersDict.updateValue(rejectedUsers, forKey: ControllerAccessState.denied)
+                            progress += 50
+                        }
+                    })
                 }
             } else {
-                complitionHandler(false, [])
+                progress += 50
+            }
+        }
+        
+        var waitingUsers = [CUser]()
+        getUIDs(waitingUserPath) { (exists, uids) in
+            if exists, uids != [] {
+                for uid in uids {
+                    self.getCUser(uid, withState: nil, complitionHandler: { (user) in
+                        if let usr = user {
+                            waitingUsers.append(usr)
+                        }
+                        if waitingUsers.count == uids.count {
+                            waitingUsers.sort(by: < )
+                            self.usersDict.updateValue(waitingUsers, forKey: ControllerAccessState.waiting)
+                            progress += 50
+                        }
+                    })
+                }
+            } else {
+                progress += 50
             }
         }
     }
@@ -284,6 +246,42 @@ class UserList: NSObject {
         }
     }
     
+    private func getCUser(_ uid: String, withState modState: Bool?, complitionHandler: @escaping (_ cUser: CUser?) -> () ) {
+        Fire.shared.getUser(UID: uid) { (userData) in
+            if let name = userData["name"] as? String {
+                let user = CUser(name: name, uid: uid)
+                
+                if let isHead = userData["isHead"] as? Int, isHead == 1 {
+                    if Fire.shared.myUID == uid {
+                        user.type = .meAndHead
+                    } else {
+                        user.type = .head
+                    }
+                } else if uid == Fire.shared.myUID {
+                    user.type = .me
+                }
+                if let state = modState {
+                    user.allowSecMod = state
+                }
+                complitionHandler(user)
+            }
+        }
+    }
+    
+    private func getUIDs(_ path: String, complitionHandler: @escaping (Bool,[String]) -> ()) {
+        Fire.shared.doesDataExist(at: path) { (doesExists, data) in
+            if doesExists {
+                if let dict = data as? NSDictionary {
+                    if let keys = dict.allKeys as? [String] {
+                        complitionHandler(true,keys)
+                    }
+                }
+            } else {
+                complitionHandler(false, [])
+            }
+        }
+    }
+    
     func startObserver() {
         dhandle = Fire.shared.database.child(verifiedUsersPath).observe(.value) { (snapshot) in
 
@@ -336,48 +334,6 @@ class UserList: NSObject {
     func removeObserver() {
         if let handle = dhandle {
             Fire.shared.database.child(verifiedUsersPath).removeObserver(withHandle: handle)
-        }
-    }
-    
-    private func fillNonVerifiedUsers() {
-        var rejectedUsers = [CUser]()
-        getUIDs(rejectedUserPath) { (exists, uids) in
-            if exists, uids != [] {
-                for uid in uids {
-                    self.getCUser(uid, withState: nil, complitionHandler: { (user) in
-                        if let usr = user {
-                            rejectedUsers.append(usr)
-                        }
-                        if rejectedUsers.count == uids.count {
-                            rejectedUsers.sort(by: < )
-                            self.usersDict.updateValue(rejectedUsers, forKey: ControllerAccessState.denied)
-                            self.nonVerUserFillProgress += 50
-                        }
-                    })
-                }
-            } else {
-                self.nonVerUserFillProgress += 50
-            }
-        }
-        
-        var waitingUsers = [CUser]()
-        getUIDs(waitingUserPath) { (exists, uids) in
-            if exists, uids != [] {
-                for uid in uids {
-                    self.getCUser(uid, withState: nil, complitionHandler: { (user) in
-                        if let usr = user {
-                            waitingUsers.append(usr)
-                        }
-                        if waitingUsers.count == uids.count {
-                            waitingUsers.sort(by: < )
-                            self.usersDict.updateValue(waitingUsers, forKey: ControllerAccessState.waiting)
-                            self.nonVerUserFillProgress += 50
-                        }
-                    })
-                }
-            } else {
-                self.nonVerUserFillProgress += 50
-            }
         }
     }
 }

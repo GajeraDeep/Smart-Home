@@ -125,6 +125,20 @@ class Fire {
         }
     }
     
+    func pushNotification(_ object: Any, complitionHandler: ((Bool) -> ())? ) {
+        database.child("notifications").child(myCID!).childByAutoId().setValue(object) { (error, _) in
+            if error != nil {
+                if let handler = complitionHandler {
+                    handler(false)
+                }
+            } else {
+                if let handler = complitionHandler {
+                    handler(true)
+                }
+            }
+        }
+    }
+    
     func doesDataExist(at path:String, compltionHandler: @escaping (_ doesExist: Bool, _ data:Any?) -> () ) {
         self.database.child(path).observeSingleEvent(of: .value) { (snap) in
             if snap.exists() {
@@ -150,15 +164,18 @@ class Fire {
         
         if let name = user.displayName { newUser["name"] = name }
         if let data = userData {
-            if let cid = data["cid"] as? String {
-                newUser["controllerID"] = cid
+            guard let cid = data["cid"] as? String else {
+                return
             }
+            newUser["controllerID"] = cid
+            
             if let isHead = data["isHead"] as? Bool, isHead {
                 newUser["isHead"] = 1
-                setData(user.uid, at: "heads/" + (data["cid"] as! String), complitionHandler: nil)
+                setData(user.uid, at: "heads/" + cid, complitionHandler: nil)
+                setData(true, at: "verifiedUsers/" + cid + "/" + user.uid + "/securityChanges", complitionHandler: nil)
             } else {
                 newUser["accessState"] = 0
-                setData(true, at: "requests/" + (data["cid"] as! String) + "/" + user.uid, complitionHandler: nil)
+                setData(true, at: "requests/" + cid + "/" + user.uid, complitionHandler: nil)
             }
         }
         

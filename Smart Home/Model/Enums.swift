@@ -11,6 +11,7 @@ import UIKit
 enum CellIdentifier: String {
     case applianceCell
     case cUserCell
+    case notificationTBViewCell
 }
 
 enum StoryBoardIDs: String {

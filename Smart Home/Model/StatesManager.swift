@@ -9,10 +9,10 @@
 import Foundation
 import Firebase
 
-enum SecurityState {
-    case enabled
-    case dissabled
-    case breached
+enum SecurityState: Int {
+    case enabled = 1
+    case dissabled = 0
+    case breached = -1
     
     var normalizedString: String {
         switch self {
@@ -39,6 +39,17 @@ enum ControllerAccessState: String {
             return 0
         case .denied:
             return -1
+        }
+    }
+    
+    func pathWith(cid: String) -> String {
+        switch self {
+        case .accepted:
+            return "verifiedUsers/" + cid
+        case .waiting:
+            return "requests/" + cid
+        case .denied:
+            return "rejectedUsers/" + cid
         }
     }
 }
@@ -205,20 +216,28 @@ class StatesManager {
                 if state == .enabled {
                     self.security = .dissabled
                     Fire.shared.setData(0, at: securityPath.child("state"), complitionHandler: nil)
-                    
                 } else if state == .breached {
                     self.security = .enabled
                     Fire.shared.setData(0, at: securityPath.child("breached"), complitionHandler: nil)
-                    
                 } else {
                     self.security = .enabled
                     Fire.shared.setData(1, at: self.securityPath.child("state"), complitionHandler: nil)
                 }
             }
+            pushNotificationWith(security!)
             
         default:
             break
         }
+    }
+    
+    private func pushNotificationWith(_ securityState: SecurityState) {
+        let dataDict: [String: Any] = [
+            "modifierID": Fire.shared.myUID!,
+            "timestamp": Date.init().timeIntervalSince1970,
+            "newState": securityState.rawValue
+        ]
+        Fire.shared.pushNotification(dataDict, complitionHandler: nil)
     }
     
     func doesHandlerExist(forKeys keys: [Key]) -> Bool {

@@ -52,9 +52,9 @@ class BaseViewController: UIViewController {
         let menuBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), landscapeImagePhone: nil, style: .done, target: self, action: #selector(menuBarButtonPressed(_:)))
         self.navigationItem.rightBarButtonItem = menuBarButtonItem
         
-        super.viewDidLoad()
-        
         self.isHeroEnabled = true
+        
+        super.viewDidLoad()
     }
     
     @objc func menuBarButtonPressed(_ sender: UIBarButtonItem ) {

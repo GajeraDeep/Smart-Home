@@ -16,20 +16,8 @@ class ControllerViewController: BaseViewController {
     
     var userListProvider: UserList!
     
-    override var databaseConnection: Bool? {
-        didSet {
-            super.databaseConnection = databaseConnection
-            if databaseConnection != oldValue {
-                databaseConnection! ? userListProvider.startObserver() : userListProvider.removeObserver()
-            }
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        hud.show(animated: true)
-        
         userListProvider = UserList(CID: Fire.shared.myCID!, tableView: self.tableView)
         userListProvider.delegate = self
         
@@ -51,6 +39,8 @@ class ControllerViewController: BaseViewController {
         if let isHead = StatesManager.manager?.isUserHead, isHead {
             setEditBarButtonItem()
         }
+        
+        hud.show(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,9 +65,9 @@ class ControllerViewController: BaseViewController {
             if self.userListProvider.enableEditing {
                 hud.label.text = "Syncing.."
                 hud.show(animated: true)
-                
                 self.userListProvider.enableEditing = false
                 self.navigationItem.leftBarButtonItem?.title = "Edit"
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
             } else {
                 authenticateUser()
             }
@@ -99,13 +89,14 @@ class ControllerViewController: BaseViewController {
                     }
                     self.hud.label.text = "Fetching.."
                     self.hud.show(animated: true)
+                    self.navigationItem.rightBarButtonItem?.isEnabled = false
                     
                     self.userListProvider.enableEditing = true
                     self.navigationItem.leftBarButtonItem?.title = "Done"
                 }
             }
         } else {
-            if error?.code == LAError.biometryLockout.rawValue {
+            if let code = error?.code, code == kLAErrorBiometryLockout {
 
                 let okAction = UIAlertAction(title: "OK", style: .default)
                 self.showAlert(withActions: [okAction],

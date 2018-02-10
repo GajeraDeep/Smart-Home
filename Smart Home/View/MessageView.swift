@@ -12,12 +12,11 @@ class MessageView: UIView {
     
     var label = UILabel(frame: CGRect.zero)
     
-    var isVisible: Bool!
+    var isVisible: Bool = false
     
     func initMessage() {
         self.alpha = 0
         self.addSubview(label)
-        self.isVisible = false
         self.label.font = label.font.withSize(12)
     }
     
