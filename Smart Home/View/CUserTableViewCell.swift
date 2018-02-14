@@ -20,18 +20,6 @@ class CUserTableViewCell: UITableViewCell {
     
     var delegate: CUserTableViewCellDelegate?
     
-    var name: String? {
-        get {
-            return self.nameLabel.text
-        }
-        set {
-            self.nameLabel.text = newValue
-        }
-    }
-    
-    /**
-     will always return normal
-    */
     var userType: CUserType {
         get {
             return .normal

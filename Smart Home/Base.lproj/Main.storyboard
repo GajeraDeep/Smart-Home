@@ -25,7 +25,7 @@
         <!--Controller-->
         <scene sceneID="ESx-Aq-ZNA">
             <objects>
-                <viewController id="AF9-Ce-UyJ" customClass="ControllerViewController" customModule="Smart_Home" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AF9-Ce-UyJ" customClass="C_DetailsViewController" customModule="Smart_Home" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RmR-GN-746">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,8 +132,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Controller" id="VbI-iD-0uH"/>
                     <connections>
-                        <outlet property="messageView" destination="G9g-Lo-Nik" id="yAD-yQ-ePX"/>
-                        <outlet property="tableView" destination="REx-UL-PgW" id="umt-jG-7JB"/>
+                        <outlet property="messageView" destination="G9g-Lo-Nik" id="LJr-hl-7uH"/>
+                        <outlet property="tableView" destination="REx-UL-PgW" id="Cyn-H2-Ctx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fuU-EX-Acu" userLabel="First Responder" sceneMemberID="firstResponder"/>

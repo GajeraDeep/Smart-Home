@@ -8,14 +8,13 @@
 
 import UIKit
 import Firebase
+import MBProgressHUD
 
 final class Notification {
     var uid: String
     var name: String = ""
     var state: SecurityState
     var timstamp: TimeInterval
-    
-    static var idToNameDict: [String: String] = [:]
     
     init(uid: String, state: Int, timstamp: TimeInterval) {
         self.uid = uid
@@ -24,18 +23,12 @@ final class Notification {
     }
     
     func getUserName(forId id: String, complitionHandler: @escaping (String) -> ()) {
-        if let _name = Notification.idToNameDict[id] {
-            complitionHandler(_name)
-        } else {
-            Fire.shared.getUser(UID: id, { (userData) in
-                if let _name = userData["name"] as? String {
-                    Notification.idToNameDict[self.uid] = _name
-                    complitionHandler(_name)
-                }
-            })
-        }
+        Fire.shared.getUserName(UID: id, { (userName) in
+            complitionHandler(userName)
+        })
     }
 }
+
 
 class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var modifierName: UILabel!
@@ -43,11 +36,15 @@ class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var timeAgo: UILabel!
 }
 
+
 class NotificationViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var segmentController: UISegmentedControl?
     private let refreshControl = UIRefreshControl()
+    let hud = MBProgressHUD()
+    
     let dateFormatter = DateFormatter()
     var notifications: [Notification] = [] {
         didSet {
@@ -57,6 +54,8 @@ class NotificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(hud)
+        //hud.show(animated: true)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -67,9 +66,11 @@ class NotificationViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         startNotificationObserver()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
+        if StatesManager.manager?.isUserHead == true {
+            setSecgmentController()
+        }
+        
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
         } else {
@@ -77,20 +78,42 @@ class NotificationViewController: UIViewController {
         }
         
         refreshControl.addTarget(self, action: #selector(refreshTabel), for: .valueChanged)
+        
+        UsersManager.shared.delegates.append(self)
     }
 
     @objc func refreshTabel() {
         tableView.reloadData()
-        
         refreshControl.endRefreshing()
+    }
+    
+    func setSecgmentController() {
+        segmentController = UISegmentedControl()
+        segmentController?.insertSegment(withTitle: "General", at: 0, animated: true)
+        segmentController?.insertSegment(withTitle: "Requests", at: 1, animated: true)
+        
+        segmentController?.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
+        
+        segmentController?.selectedSegmentIndex = 0
+        
+        self.navigationItem.titleView = segmentController
+    }
+    
+    @objc func segmentValueChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            tableView.reloadData()
+        case 1:
+            tableView.reloadData()
+        default:
+            print("Something else pressed")
+        }
     }
     
     func startNotificationObserver() {
         let notificationRef = Fire.shared.database.child("notifications/\(Fire.shared.myCID!)")
         
         notificationRef.observe(.childAdded) { (snapshot) in
-            //let name = snapshot.childSnapshot(forPath: "/modifierID").value as? String
-            
             if let dict = snapshot.value as? [String: Any] {
                 guard let uid = dict["modifierID"] as? String else { return }
                 guard let newState = dict["newState"] as? Int else { return }
@@ -114,27 +137,42 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notifications.count
+        if segmentController?.selectedSegmentIndex == 1 {
+            return UsersManager.shared.waitingUser.count
+        } else {
+            return notifications.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.notificationTBViewCell.rawValue, for: indexPath) as? NotificationTableViewCell {
-            let notification = notifications[indexPath.row]
-            
-            cell.modifierName.text = notification.name
-            cell.secModifications.text = {
-                switch notification.state {
-                case .enabled:
-                    return "Enabled Security."
-                case .dissabled:
-                    return "Dissabled Security."
-                case .breached:
-                    return "Security Breached."
-                }
-            }()
-            cell.timeAgo.text = dateFormatter.timeSince(from: NSDate.init(timeIntervalSince1970: notification.timstamp))
-            
-            return cell
+            if segmentController?.selectedSegmentIndex == 1 {
+                let user = UsersManager.shared.waitingUser[indexPath.row]
+                
+                cell.modifierName.text = user.name
+                cell.timeAgo.text = ""
+                cell.secModifications.text = "Wants access to your controller."
+                
+                return cell
+            } else {
+                let notification = notifications[indexPath.row]
+                
+                cell.modifierName.text = notification.name
+                cell.secModifications.text = {
+                    switch notification.state {
+                    case .enabled:
+                        return "Enabled Security."
+                    case .dissabled:
+                        return "Dissabled Security."
+                    case .breached:
+                        return "Security Breached."
+                    }
+                }()
+                cell.timeAgo.text = dateFormatter.timeSince(from: NSDate.init(timeIntervalSince1970: notification.timstamp))
+                
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -147,6 +185,16 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
+extension NotificationViewController: UserManagerDelegate {
+    func waitingUserChanged() {
+        let count = UsersManager.shared.waitingUser.count
+        
+        self.tabBarItem.badgeValue = count > 0 ? String(count) : nil
+        tableView.reloadData()
+    }
+}
+
+///////////// dateSinceFunction ////////////
 extension DateFormatter {
     func timeSince(from: NSDate, numericDates: Bool = false) -> String {
         let calendar = Calendar.current

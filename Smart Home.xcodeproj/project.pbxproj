@@ -18,7 +18,6 @@
 		077B10142000AFDE00456633 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077B10122000AFDE00456633 /* LaunchScreen.storyboard */; };
 		077B101C2000C78100456633 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 077B101B2000C78100456633 /* Podfile */; };
 		077BAEBB200FBAB300118A73 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BAEBA200FBAB300118A73 /* HomeViewController.swift */; };
-		077BAEBD200FBD1300118A73 /* ControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BAEBC200FBD1300118A73 /* ControllerViewController.swift */; };
 		077BAEBF200FC12200118A73 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077BAEBE200FC12200118A73 /* NotificationViewController.swift */; };
 		0784669F20286F9200786326 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784669E20286F9200786326 /* Reachability.swift */; };
 		078466A12028A6E500786326 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078466A02028A6E400786326 /* MessageView.swift */; };
@@ -34,7 +33,6 @@
 		0794F68720125911008968AD /* PassTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0794F68620125911008968AD /* PassTextField.swift */; };
 		0797333B202ECCC90092890D /* UsersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0797333A202ECCC90092890D /* UsersManager.swift */; };
 		07A16AEF202C295800FE7C55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07A16AEE202C295800FE7C55 /* GoogleService-Info.plist */; };
-		07A37E1E2029AD4E00A13D1D /* UsersListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A37E1D2029AD4E00A13D1D /* UsersListProvider.swift */; };
 		07A9759E2010E2AD00676A69 /* UIView + Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9759D2010E2AD00676A69 /* UIView + Extentions.swift */; };
 		07D619DE202D5EB500B008DB /* BaseViewConteoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D619DD202D5EB500B008DB /* BaseViewConteoller.swift */; };
 		07D619E0202D8B8C00B008DB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07D619DF202D8B8B00B008DB /* Info.plist */; };
@@ -45,6 +43,7 @@
 		07E0BD0E201C751700BE7E63 /* BulbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E0BD0C201C751700BE7E63 /* BulbView.swift */; };
 		07E0BD18201C75FD00BE7E63 /* Fan.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07E0BD16201C75FD00BE7E63 /* Fan.xcassets */; };
 		07E0BD19201C75FD00BE7E63 /* FanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E0BD17201C75FD00BE7E63 /* FanView.swift */; };
+		07E3689A20322D40005E322C /* C_DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E3689920322D40005E322C /* C_DetailsViewController.swift */; };
 		07FF85D620261308001808BE /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF85D520261308001808BE /* FirebaseManager.swift */; };
 		31B0D52558A1A55795361A91 /* Pods_Smart_Home.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E88B44C85A0BA75AA4ABE7D /* Pods_Smart_Home.framework */; };
 /* End PBXBuildFile section */
@@ -62,7 +61,6 @@
 		077B10132000AFDE00456633 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		077B101B2000C78100456633 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		077BAEBA200FBAB300118A73 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		077BAEBC200FBD1300118A73 /* ControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerViewController.swift; sourceTree = "<group>"; };
 		077BAEBE200FC12200118A73 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		0784669E20286F9200786326 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		078466A02028A6E400786326 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 		0794F68620125911008968AD /* PassTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassTextField.swift; sourceTree = "<group>"; };
 		0797333A202ECCC90092890D /* UsersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersManager.swift; sourceTree = "<group>"; };
 		07A16AEE202C295800FE7C55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		07A37E1D2029AD4E00A13D1D /* UsersListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListProvider.swift; sourceTree = "<group>"; };
 		07A9759D2010E2AD00676A69 /* UIView + Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extentions.swift"; sourceTree = "<group>"; };
 		07D619DD202D5EB500B008DB /* BaseViewConteoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewConteoller.swift; sourceTree = "<group>"; };
 		07D619DF202D8B8B00B008DB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,6 +86,7 @@
 		07E0BD0C201C751700BE7E63 /* BulbView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulbView.swift; sourceTree = "<group>"; };
 		07E0BD16201C75FD00BE7E63 /* Fan.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Fan.xcassets; sourceTree = "<group>"; };
 		07E0BD17201C75FD00BE7E63 /* FanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanView.swift; sourceTree = "<group>"; };
+		07E3689920322D40005E322C /* C_DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C_DetailsViewController.swift; sourceTree = "<group>"; };
 		07FF85D520261308001808BE /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		1FD3DE4B6BE2C5C2AAE296EB /* Pods-Smart Home.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smart Home.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Smart Home/Pods-Smart Home.debug.xcconfig"; sourceTree = "<group>"; };
 		2E88B44C85A0BA75AA4ABE7D /* Pods_Smart_Home.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smart_Home.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,7 +171,7 @@
 				070F7E0E200FC6A7001BDD48 /* TabBarViewControler.swift */,
 				07D619DD202D5EB500B008DB /* BaseViewConteoller.swift */,
 				077BAEBA200FBAB300118A73 /* HomeViewController.swift */,
-				077BAEBC200FBD1300118A73 /* ControllerViewController.swift */,
+				07E3689920322D40005E322C /* C_DetailsViewController.swift */,
 				077BAEBE200FC12200118A73 /* NotificationViewController.swift */,
 			);
 			path = "View Controllers";
@@ -208,10 +206,9 @@
 			isa = PBXGroup;
 			children = (
 				0786D3E22013419D00771CF0 /* Enums.swift */,
+				0784669E20286F9200786326 /* Reachability.swift */,
 				07FF85D520261308001808BE /* FirebaseManager.swift */,
 				07D982722026D6A0001450BE /* StatesManager.swift */,
-				0784669E20286F9200786326 /* Reachability.swift */,
-				07A37E1D2029AD4E00A13D1D /* UsersListProvider.swift */,
 				0797333A202ECCC90092890D /* UsersManager.swift */,
 			);
 			path = Model;
@@ -424,18 +421,17 @@
 				070F7E0F200FC6A7001BDD48 /* TabBarViewControler.swift in Sources */,
 				07920A612010ADB9000E6FD8 /* SignInViewController.swift in Sources */,
 				07D982762026EFF2001450BE /* AnimationViewProtocol.swift in Sources */,
-				077BAEBD200FBD1300118A73 /* ControllerViewController.swift in Sources */,
 				078F00EF201B22E400447A12 /* ApplianceCollectionViewCell.swift in Sources */,
 				07D619DE202D5EB500B008DB /* BaseViewConteoller.swift in Sources */,
 				0794F68720125911008968AD /* PassTextField.swift in Sources */,
 				07D982732026D6A0001450BE /* StatesManager.swift in Sources */,
 				07A9759E2010E2AD00676A69 /* UIView + Extentions.swift in Sources */,
 				0786D3E7201354CA00771CF0 /* GetControllerIDViewController.swift in Sources */,
+				07E3689A20322D40005E322C /* C_DetailsViewController.swift in Sources */,
 				0797333B202ECCC90092890D /* UsersManager.swift in Sources */,
 				07D9BB3F2019B7FA00390007 /* CreateNewAccountViewController.swift in Sources */,
 				07FF85D620261308001808BE /* FirebaseManager.swift in Sources */,
 				078466A12028A6E500786326 /* MessageView.swift in Sources */,
-				07A37E1E2029AD4E00A13D1D /* UsersListProvider.swift in Sources */,
 				077B100A2000AFDE00456633 /* AppDelegate.swift in Sources */,
 				0786D3E32013419D00771CF0 /* Enums.swift in Sources */,
 				07E0BD0E201C751700BE7E63 /* BulbView.swift in Sources */,

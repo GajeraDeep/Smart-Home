@@ -32,14 +32,13 @@ class GetControllerIDViewController: TextInputViewController {
         whenLastTextFieldReturns = {
             self.processControllerID()
         }
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if let firstResponder = self.view.viewWithTag(1) as? UITextField {
             firstResponder.becomeFirstResponder()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -56,7 +55,7 @@ class GetControllerIDViewController: TextInputViewController {
         }
         
         let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
-
+        self.view.endEditing(true)
         self.showAlert(
             withActions: [yesAction, noAction],
             ofType: .alert,

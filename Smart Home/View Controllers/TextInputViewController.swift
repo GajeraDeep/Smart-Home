@@ -21,12 +21,16 @@ class TextInputViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addDismissKeyboardGesture()
     
         hud = MBProgressHUD()
         hud.isUserInteractionEnabled = false
         
         view.addSubview(hud)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        addDismissKeyboardGesture()
     }
 
     func addDismissKeyboardGesture() {

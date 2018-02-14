@@ -149,10 +149,15 @@ class Fire {
         }
     }
     
-    func getUser(UID: String, _ complitionHandler: @escaping ([String: Any]) -> ()) {
-        database.child("users").child(UID).observeSingleEvent(of: .value) { (snap) in
-            if let userData = snap.value as? [String: Any] {
-                complitionHandler(userData)
+    func getUserName(UID: String, _ complitionHandler: @escaping (String) -> ()) {
+        if let name = UsersManager.shared.usersMap[UID] {
+            complitionHandler(name)
+        } else {
+            database.child("users").child(UID).child("name").observeSingleEvent(of: .value) { (snap) in
+                if let userName = snap.value as? String {
+                    UsersManager.shared.usersMap[UID] = userName
+                    complitionHandler(userName)
+                }
             }
         }
     }
@@ -196,9 +201,9 @@ class Fire {
     func removeData(at path: String, complitionHandler: @escaping (Bool) -> ()) {
         database.child(path).removeValue { (error, _ ) in
             if error != nil {
-                complitionHandler(true)
-            } else {
                 complitionHandler(false)
+            } else {
+                complitionHandler(true)
             }
         }
     }

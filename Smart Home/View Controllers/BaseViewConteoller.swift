@@ -70,6 +70,7 @@ class BaseViewController: UIViewController {
                 
                 Fire.shared.stopMainObservers()
                 StatesManager.manager = nil
+                UsersManager.shared.removeObservers(forStates: [.accepted, .waiting])
                 
                 let signinViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: StoryBoardIDs.signInVC.rawValue)
                 signinViewController.heroModalAnimationType = .push(direction: .right)

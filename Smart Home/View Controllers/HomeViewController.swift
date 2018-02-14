@@ -139,8 +139,11 @@ class HomeViewController: BaseViewController {
         Fire.shared.startMainObservers()
         
         Fire.shared.userSignedInHandler = {
-            StatesManager.initManager(uid: Fire.shared.myUID!, cid: Fire.shared.myCID!)
-            StatesManager.manager?.delegate = self
+            Fire.shared.doesDataExist(at: "heads/\(Fire.shared.myCID!)", compltionHandler: { (doesExist, data) in
+                let headID = data as? String ?? ""
+                StatesManager.initManager(headID: headID)
+                StatesManager.manager?.delegate = self
+            })
         }
         
         let handler: (Bool) -> () = { state in
@@ -158,8 +161,6 @@ class HomeViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        StatesManager.manager?.delegate = self
-        
         if !((StatesManager.manager?.doesHandlerExist(forKeys: [.fan, .light])) ?? true) {
             StatesManager.manager?.startObservers(forKeys: [.fan, .light])
         }
@@ -352,6 +353,7 @@ extension HomeViewController: StatesManagerProtocol {
             self.securityButtonView.addBreachDetectedAnimation()
             self.interfaceType = .secAlert
         }
+        self.tabBarController?.tabBar.alpha = 1
     }
     
     func accessStateChanged(to: ControllerAccessState) {
@@ -360,9 +362,35 @@ extension HomeViewController: StatesManagerProtocol {
             if interfaceType != .loading {
                 self.interfaceType = .loading
             }
-
-            self.tabBarController?.tabBar.alpha = 1
             
+            // MARK: - Start all observers
+            
+            var fetchingProgress = 0 {
+                didSet {
+                    if fetchingProgress == 100 {
+                        if !StatesManager.manager!.doesHandlerExist(forKeys: [.light]) {
+                            let keys: [Key] = StatesManager.manager!.isUserHead ? [.fan, .light, .security] : [.fan, .light, .security, .allowSecMod]
+                            StatesManager.manager!.startObservers(forKeys: keys)
+                        }
+                    }
+                }
+            }
+            
+            UsersManager.shared.startObserver(forUserWithState: .accepted, complitionHandler: { (success) in
+                fetchingProgress += 50
+            })
+            
+            if StatesManager.manager!.isUserHead {
+                UsersManager.shared.startObserver(forUserWithState: .waiting, complitionHandler: { (sucess) in
+                    let count = UsersManager.shared.waitingUser.count
+                    self.tabBarController?.tabBar.items?.last?.badgeValue = count > 0 ? String(count) : nil
+                    
+                    fetchingProgress += 50
+                })
+            } else {
+                fetchingProgress += 50
+            }
+
         case .waiting:
             self.interfaceType = .accessWaiting
             
@@ -379,11 +407,4 @@ extension HomeViewController: StatesManagerProtocol {
         isUserPresent = to
     }
 }
-
-
-
-
-
-
-
 

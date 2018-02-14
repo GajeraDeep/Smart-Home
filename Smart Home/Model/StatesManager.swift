@@ -52,6 +52,8 @@ enum ControllerAccessState: String {
             return "rejectedUsers/" + cid
         }
     }
+    
+    static let keys: [ControllerAccessState] = [.accepted, .waiting, .denied]
 }
 
 enum Key {
@@ -84,14 +86,24 @@ class StatesManager {
     private let isHeadPath: String
     private let userPresentPath: DatabaseReference
     
-    var delegate: StatesManagerProtocol?
+    var delegate: StatesManagerProtocol? {
+        didSet {
+            if isUserHead {
+                self.contAccess = .accepted
+                self.allowSecMod = true
+            } else {
+                startObservers(forKeys: [.contAccess])
+            }
+        }
+    }
     
     private var handlers: [Key : DatabaseHandle] = [:]
     var isUserPresentDHandler: DatabaseHandle?
     
     var stateChangeHandler: ((_ forKey: Key, _ to: Any) -> ())?
     
-    var isUserHead: Bool?
+    var isUserHead: Bool
+    var headID: String
     
     private var light: Bool? {
         willSet {
@@ -129,10 +141,6 @@ class StatesManager {
                 allowSecMod = nil
                 fan = nil
                 light = nil
-            } else {
-                if !doesHandlerExist(forKeys: [.light]) {
-                    startObservers(forKeys: [.fan, .light, .security, .allowSecMod])
-                }
             }
         }
     }
@@ -162,7 +170,10 @@ class StatesManager {
         }
     }
     
-    fileprivate init(UID: String, CID: String) {
+    fileprivate init(headID: String) {
+        let UID = Fire.shared.myUID!
+        let CID = Fire.shared.myCID!
+        
         let conRef = Fire.shared.database.child("controllers").child(CID)
         
         lightPath = conRef.child("appliances/light")
@@ -173,29 +184,17 @@ class StatesManager {
         allowSecChangesPath = Fire.shared.database.child("verifiedUsers/\(CID)/\(UID)/securityChanges")
         userPresentPath = Fire.shared.database.child("controllers/" + CID + "/userPresent")
         
-        Fire.shared.doesDataExist(at: isHeadPath) { (exists, _) in
-            if exists {
-                self.isUserHead = true
-                if self.delegate != nil {
-                    self.contAccess = .accepted
-                    self.allowSecMod = true
-                }
-            } else {
-                self.isUserHead = false
-                if self.delegate != nil {
-                    self.startObservers(forKeys: [.contAccess])
-                }
-            }
-        }
+        self.isUserHead = headID == Fire.shared.myUID!
+        self.headID = headID
     }
     
     deinit {
         removeObservers(forKeys: Key.allKeys)
     }
     
-    static func initManager(uid: String, cid: String) {
+    static func initManager(headID: String = "") {
         if manager == nil {
-            manager = StatesManager.init(UID: uid, CID: cid)
+            manager = StatesManager.init(headID: headID)
         }
     }
     
@@ -281,7 +280,7 @@ class StatesManager {
                     }
                 }
             case .contAccess:
-                if let isHead = isUserHead, !isHead {
+                if !isUserHead {
                     self.handlers[.contAccess] = self.contAccessPath.observe(.value, with: { (snap) in
                         if let state = snap.value as? Int {
                             switch state {
@@ -298,7 +297,7 @@ class StatesManager {
                     })
                 }
             case .allowSecMod:
-                if let isHead = isUserHead, !isHead {
+                if !isUserHead {
                     handlers[.allowSecMod] = allowSecChangesPath.observe(.value, with: { (snap) in
                         if let state =  snap.value as? Int {
                             self.allowSecMod = state == 1 ? true : false
