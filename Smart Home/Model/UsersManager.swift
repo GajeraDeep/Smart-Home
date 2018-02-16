@@ -59,7 +59,7 @@ extension UserManagerDelegate {
 class UsersManager {
     static let shared: UsersManager = UsersManager()
     
-    var usersMap: [String: String] = [:]
+    var usersIdAndNameDict: [String: String] = [:]
     
     var verifiedUsers: [CUser] = [] {
         didSet {
@@ -88,87 +88,52 @@ class UsersManager {
     func startObserver(forUserWithState state: ControllerAccessState, complitionHandler: ((Bool) -> ())? ) {
         let path = state.pathWith(cid: Fire.shared.myCID!)
         
-        getChildrenCount(forPath: path) { (count) in
-            if count > 0 {
-                var usersFetched = 0 {
-                    didSet {
-                        if usersFetched == count {
-                            if let handler = complitionHandler {
-                                state == .accepted ? self.verifiedUsers.sort() : self.waitingUser.sort()
-                                handler(true)
-                            }
-                        }
-                    }
-                }
-                
-                if !(self.doesObserverExists(forUsersInState: state)) {
-                    let childAddedHandle = Fire.shared.database.child(path)
-                        .observe(.childAdded, with: { (snapshot) in
-                            Fire.shared.getUserName(UID: snapshot.key, { (name) in
-                                var user = CUser(name: name, uid: snapshot.key)
-                                
-                                switch state {
-                                case .accepted:
-                                    let uid = snapshot.key
-                                    let headID = StatesManager.manager?.headID
-                                    
-                                    if uid == Fire.shared.myUID {
-                                        if uid == headID {
-                                            user.type = .meAndHead
-                                        } else {
-                                            user.type = .me
-                                        }
-                                    } else if uid == headID {
-                                        user.type = .head
-                                    } else {
-                                            user.type = .normal
-                                    }
-                                    
-                                    user.allowSecMod = snapshot.childSnapshot(forPath: "securityChanges").value as? Bool
-                                    self.verifiedUsers.append(user)
-                                    
-                                    if usersFetched != count {
-                                        usersFetched += 1
-                                    } else {
-                                        self.verifiedUsers.sort()
-                                    }
-                                    
-                                case .waiting:
-                                    self.waitingUser.append(user)
-                                    if usersFetched != count {
-                                        usersFetched += 1
-                                    } else {
-                                        self.waitingUser.sort()
-                                    }
-                                    
-                                default:
-                                    fatalError("Unexpected key passed to Users Manager, start observer")
-                                }
-                            })
-                        })
-                    
-                    let childRemovedHandle = Fire.shared.database.child(path)
-                        .observe(.childRemoved, with: { (snapshot) in
+        fetchOldUsers(forState: state) {
+            if let handler = complitionHandler {
+                handler(true)
+                let childAddedHandle = Fire.shared.database.child(path).queryLimited(toLast: 1).observe(.childAdded, with: { (snapshot) in
+                    if UsersManager.shared.usersIdAndNameDict[snapshot.key] == nil {
+                        Fire.shared.getUserName(UID: snapshot.key, { (name) in
+                            var user = CUser(name: name, uid: snapshot.key)
+                            
                             switch state {
                             case .accepted:
-                                self.verifiedUsers = self.verifiedUsers.filter({ (user) -> Bool in
-                                    user.uid != snapshot.key
-                                })
+                                let uid = snapshot.key
+                                let headID = StatesManager.manager?.headID
+                                
+                                user.type = self.getUserType(uid: uid, headID: headID)
+                                
+                                user.allowSecMod = snapshot.childSnapshot(forPath: "securityChanges").value as? Bool
+                                self.verifiedUsers.append(user)
+                                
+                                self.verifiedUsers.sort()
+                                
                             case .waiting:
-                                self.waitingUser = self.waitingUser.filter({ (user) -> Bool in
-                                    user.uid != snapshot.key
-                                })
+                                self.waitingUser.append(user)
                             default:
                                 fatalError("Unexpected key passed to Users Manager, start observer")
                             }
                         })
-                    
-                    self.databaseHandles[state]?.insert(contentsOf: [childAddedHandle, childRemovedHandle], at: 0)
-                }
-            } else {
-                if let handler = complitionHandler {
-                    handler(true)
-                }
+                    }
+                })
+                
+                let childRemovedHandle = Fire.shared.database.child(path).observe(.childRemoved, with: { (snapshot) in
+                    switch state {
+                    case .accepted:
+                        self.verifiedUsers = self.verifiedUsers.filter({ (user) -> Bool in
+                            user.uid != snapshot.key
+                        })
+                    case .waiting:
+                        self.waitingUser = self.waitingUser.filter({ (user) -> Bool in
+                            user.uid != snapshot.key
+                        })
+                    default:
+                        fatalError("Unexpected key passed to Users Manager, start observer")
+                    }
+                })
+                
+                self.databaseHandles[state]?.insert(contentsOf: [childAddedHandle, childRemovedHandle], at: 0)
+
             }
         }
     }
@@ -203,8 +168,8 @@ class UsersManager {
         waitingUser = []
     }
     
-    private func getChildrenCount(forPath: String, complitonHandler: @escaping (Int) -> () ) {
-        Fire.shared.doesDataExist(at: forPath) { (doesExist, data) in
+    private func getChildrenCount(forPath path: String, complitonHandler: @escaping (Int) -> () ) {
+        Fire.shared.doesDataExist(at: path) { (doesExist, data) in
             if doesExist {
                 if let dict = data as? NSDictionary {
                     complitonHandler(dict.allKeys.count)
@@ -212,6 +177,68 @@ class UsersManager {
             } else {
                 complitonHandler(0)
             }
+        }
+    }
+    
+    private func fetchOldUsers(forState state: ControllerAccessState, complitionHandler: @escaping () -> ()) {
+        let path = state.pathWith(cid: Fire.shared.myCID!)
+        
+        Fire.shared.doesDataExist(at: path) { (doesExist, data) in
+            if doesExist {
+                if let dict = data as? NSDictionary {
+                    
+                    var usersCount = dict.allKeys.count {
+                        didSet {
+                            if usersCount == 0 {
+                                self.verifiedUsers.sort()
+                                self.waitingUser.sort()
+                                
+                                complitionHandler()
+                            }
+                        }
+                    }
+                    
+                    let headID = StatesManager.manager?.headID
+                    
+                    dict.allKeys.forEach({ (rawKey) in
+                        if let uid = rawKey as? String {
+                            Fire.shared.getUserName(UID: uid, { (name) in
+                                var user = CUser(name: name, uid: uid)
+                                
+                                if state == .accepted {
+                                    user.type = self.getUserType(uid: uid, headID: headID)
+                                    
+                                    if let userDetails = dict[uid] as? NSDictionary {
+                                        user.allowSecMod = userDetails["securityChanges"] as? Bool
+                                    }
+                                    
+                                    self.verifiedUsers.append(user)
+                                    usersCount -= 1
+                                } else if state == .waiting {
+                                    self.waitingUser.append(user)
+                                    usersCount -= 1
+                                }
+                            })
+                        }
+                    })
+                }
+            } else {
+                complitionHandler()
+            }
+        }
+    }
+    
+    private func getUserType(uid: String, headID: String?) -> CUserType {
+        if uid == Fire.shared.myUID {
+            if uid == headID {
+                return .meAndHead
+            } else {
+                return .me
+            }
+        } else if uid == headID {
+            return .head
+        } else {
+            return .normal
         }
     }
     

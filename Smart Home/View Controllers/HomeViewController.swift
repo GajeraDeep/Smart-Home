@@ -44,6 +44,8 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var appliancesLabel: UILabel!
     @IBOutlet weak var securityStateLabel: UILabel!
+    @IBOutlet weak var modificationStatusLabel: UILabel!
+    @IBOutlet weak var modificationDetailLabel: UILabel!
     
     let appliances = AppliancesType.applianceArray
     
@@ -62,12 +64,14 @@ class HomeViewController: BaseViewController {
             switch newValue {
             case .loading:
                 self.fadeAndDissableViews(true)
-                hud.show(animated: true)
+                self.hud.show(animated: true)
                 
             case .normal:
                 if interfaceType == .secEnabled || interfaceType == .secAlert {
                     self.collectionView.fadeIn()
                     self.appliancesLabel.fadeIn()
+                    self.modificationDetailLabel.alpha = 0
+                    self.modificationStatusLabel.alpha = 0
                 } else if interfaceType != .normal {
                     if interfaceType != .loading {  self.bgImage.fadeOut()  }
                     self.hud.hide(animated: true)
@@ -82,7 +86,10 @@ class HomeViewController: BaseViewController {
             case .accessDenied, .accessWaiting, .noInternetConnection:
                 if interfaceType != newValue {
                     self.hud.hide(animated: true)
-                    fadeAndDissableViews(true)
+                    self.fadeAndDissableViews(true)
+                    
+                    self.modificationDetailLabel.alpha = 0
+                    self.modificationStatusLabel.alpha = 0
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                         self.bgImage.image = newValue.bgImage
@@ -93,8 +100,6 @@ class HomeViewController: BaseViewController {
                         
                         self.securityButtonView.removeAllAnimations()
                     })
-                    
-                    
                 }
                 
             case .secEnabled, .secAlert:
@@ -110,12 +115,15 @@ class HomeViewController: BaseViewController {
                 }
                 
                 if newValue == .secEnabled {
-                    if interfaceType != .normal { self.bgImage.image = #imageLiteral(resourceName: "Home_BG") }
+                    if self.interfaceType != .normal { self.bgImage.image = #imageLiteral(resourceName: "Home_BG") }
                     self.securityStateLabel.text = "Armed Away"
                 } else {
                     self.bgImage.image = newValue.bgImage
                     self.securityStateLabel.text = "Security Breached"
                 }
+                
+                self.modificationDetailLabel.fadeIn()
+                self.modificationStatusLabel.fadeIn()
             }
         }
     }
@@ -330,12 +338,36 @@ extension HomeViewController: StatesManagerProtocol {
     func securityStateChanged(to: SecurityState, previousState: SecurityState) {
         switch to {
         case .enabled:
-            if previousState == .dissabled {
-                self.securityButtonView.addEnableSecurityAnimation()
-            } else if previousState == .breached {
-                self.securityButtonView.addDisableBreachAnimation()
-            }
-            self.interfaceType = .secEnabled
+            let lastNotificationRef = Fire.shared.database.child("notifications/" + Fire.shared.myCID!).queryLimited(toLast: 1)
+            lastNotificationRef.observeSingleEvent(of: .value, with: { (snap) in
+                guard let dict = snap.value as? NSDictionary else {
+                    return
+                }
+                
+                let key = dict.allKeys[0] as! String
+                
+                if let userID = snap.childSnapshot(forPath: key + "/modifierID").value as? String {
+                    guard let modifierName = UsersManager.shared.usersIdAndNameDict[userID] else {
+                        return
+                    }
+                    self.modificationStatusLabel.text = "Security has been enabled by"
+                    
+                    let suffix = userID == Fire.shared.myUID ? " (Me) " : ""
+                    self.modificationDetailLabel.text = modifierName + suffix
+                    
+                    if previousState == .dissabled {
+                        self.securityButtonView.addEnableSecurityAnimation()
+                    } else if previousState == .breached {
+                        self.securityButtonView.addDisableBreachAnimation()
+                    }
+                    self.interfaceType = .secEnabled
+                    
+                    let cid = Fire.shared.myCID!
+                    
+                    Fire.shared.setData(0, at: "controllers/\(cid)/appliances/fan", complitionHandler: nil)
+                    Fire.shared.setData(0, at: "controllers/\(cid)/appliances/light", complitionHandler: nil)
+                }
+            })
             
         case .dissabled:
             if previousState == .breached {
@@ -350,8 +382,27 @@ extension HomeViewController: StatesManagerProtocol {
             self.interfaceType = .normal
             
         case .breached:
-            self.securityButtonView.addBreachDetectedAnimation()
-            self.interfaceType = .secAlert
+            let lastNotificationRef = Fire.shared.database.child("notifications/" + Fire.shared.myCID!).queryLimited(toLast: 1)
+            lastNotificationRef.observeSingleEvent(of: .value, with: { (snap) in
+                guard let dict = snap.value as? NSDictionary else {
+                    return
+                }
+                
+                let key = dict.allKeys[0] as! String
+                
+                if let timeStamp = snap.childSnapshot(forPath: key + "/timestamp").value as? TimeInterval {
+
+                    self.modificationStatusLabel.text = "Breach detected on"
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.locale = Locale(identifier: "en_IN")
+                    dateFormatter.dateFormat = "MMM d, h:mm a"
+                    self.modificationDetailLabel.text = dateFormatter.string(from: Date.init(timeIntervalSince1970: timeStamp))
+                    
+                    self.securityButtonView.addBreachDetectedAnimation()
+                    self.interfaceType = .secAlert
+                }
+            })
         }
         self.tabBarController?.tabBar.alpha = 1
     }

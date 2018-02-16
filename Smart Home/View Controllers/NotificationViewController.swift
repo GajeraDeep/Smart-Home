@@ -120,12 +120,18 @@ class NotificationViewController: UIViewController {
                 guard let timestamp = dict["timestamp"] as? TimeInterval else { return }
 
                 let notification = Notification(uid: uid, state: newState, timstamp: timestamp)
-                notification.getUserName(forId: uid, complitionHandler: { (name) in
-                    if !name.isEmpty {
-                        notification.name = name
-                        self.notifications.insert(notification, at: 0)
-                    }
-                })
+                
+                if uid != Fire.shared.myCID {
+                    notification.getUserName(forId: uid, complitionHandler: { (name) in
+                        if !name.isEmpty {
+                            notification.name = name
+                            self.notifications.insert(notification, at: 0)
+                        }
+                    })
+                } else {
+                    notification.name = "Home Controller"
+                    self.notifications.insert(notification, at: 0)
+                }
             }
         }
     }

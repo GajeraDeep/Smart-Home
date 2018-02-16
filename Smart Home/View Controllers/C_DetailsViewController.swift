@@ -13,6 +13,9 @@ class C_DetailsViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableTopConstraint: NSLayoutConstraint!
+    
     var dublicateDict: [ControllerAccessState: [CUser]]? = nil
     
     var rightBarButtonItem: UIBarButtonItem!
@@ -22,6 +25,8 @@ class C_DetailsViewController: BaseViewController {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.tableView.backgroundColor = self.view.backgroundColor
         
         self.tableView.allowsSelection = false
         self.tableView.tableFooterView = UIView(frame: .zero)
@@ -85,6 +90,12 @@ class C_DetailsViewController: BaseViewController {
                             
                             self.tableView.reloadData()
                             self.hud.hide(animated: true)
+                            
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.tableHeightConstraint.priority = UILayoutPriority(rawValue: 1)
+                                self.tableTopConstraint.priority = UILayoutPriority(rawValue: 999)
+                                self.view.layoutIfNeeded()
+                            })
                         })
                     }
                 })
@@ -105,6 +116,12 @@ class C_DetailsViewController: BaseViewController {
         self.tableView.isEditing = false
         self.hud.hide(animated: true)
         self.tableView.reloadData()
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.tableTopConstraint.priority = UILayoutPriority(rawValue: 1)
+            self.tableHeightConstraint.priority = UILayoutPriority(rawValue: 999)
+            self.view.layoutIfNeeded()
+        })
     }
     
     private func authenticateUser(complitionHandler: @escaping (_ success: Bool) -> () ) {
@@ -239,6 +256,7 @@ extension C_DetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel(frame: .zero)
+        label.textColor = UIColor(red: 9/255.0, green: 52/255.0, blue: 77/255.0, alpha: 1)
         
         if tableView.isEditing {
             let text: String = {

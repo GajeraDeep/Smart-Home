@@ -150,13 +150,15 @@ class Fire {
     }
     
     func getUserName(UID: String, _ complitionHandler: @escaping (String) -> ()) {
-        if let name = UsersManager.shared.usersMap[UID] {
+        if let name = UsersManager.shared.usersIdAndNameDict[UID] {
             complitionHandler(name)
         } else {
             database.child("users").child(UID).child("name").observeSingleEvent(of: .value) { (snap) in
                 if let userName = snap.value as? String {
-                    UsersManager.shared.usersMap[UID] = userName
+                    UsersManager.shared.usersIdAndNameDict[UID] = userName
                     complitionHandler(userName)
+                } else {
+                    complitionHandler("")
                 }
             }
         }

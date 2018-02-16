@@ -67,6 +67,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="REx-UL-PgW">
                                 <rect key="frame" x="0.0" y="144" width="375" height="474"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="999" constant="474" id="qy9-FX-uuV"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cUserCell" rowHeight="57" id="rKr-8z-yzd" customClass="CUserTableViewCell" customModule="Smart_Home" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="57"/>
@@ -119,6 +122,7 @@
                         <constraints>
                             <constraint firstItem="REx-UL-PgW" firstAttribute="bottom" secondItem="rtX-J8-aEi" secondAttribute="bottom" id="4DY-C8-XLX"/>
                             <constraint firstItem="erd-Q7-Bl7" firstAttribute="trailing" secondItem="rtX-J8-aEi" secondAttribute="trailing" id="5a0-cL-x9d"/>
+                            <constraint firstItem="REx-UL-PgW" firstAttribute="top" secondItem="rtX-J8-aEi" secondAttribute="top" priority="1" id="NgR-5v-IUd"/>
                             <constraint firstItem="REx-UL-PgW" firstAttribute="trailing" secondItem="rtX-J8-aEi" secondAttribute="trailing" id="OI4-mw-KR2"/>
                             <constraint firstItem="rtX-J8-aEi" firstAttribute="trailing" secondItem="G9g-Lo-Nik" secondAttribute="trailing" id="S5j-x9-ZPP"/>
                             <constraint firstItem="erd-Q7-Bl7" firstAttribute="top" secondItem="G9g-Lo-Nik" secondAttribute="bottom" id="WPo-J9-Uz6"/>
@@ -126,13 +130,14 @@
                             <constraint firstItem="REx-UL-PgW" firstAttribute="leading" secondItem="rtX-J8-aEi" secondAttribute="leading" id="gZ0-nO-zxS"/>
                             <constraint firstItem="G9g-Lo-Nik" firstAttribute="top" secondItem="rtX-J8-aEi" secondAttribute="top" id="hCY-KH-YS6"/>
                             <constraint firstItem="G9g-Lo-Nik" firstAttribute="leading" secondItem="rtX-J8-aEi" secondAttribute="leading" id="mD7-lp-Vs2"/>
-                            <constraint firstItem="REx-UL-PgW" firstAttribute="top" secondItem="erd-Q7-Bl7" secondAttribute="bottom" constant="8" id="yVH-r6-J7M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rtX-J8-aEi"/>
                     </view>
                     <navigationItem key="navigationItem" title="Controller" id="VbI-iD-0uH"/>
                     <connections>
                         <outlet property="messageView" destination="G9g-Lo-Nik" id="LJr-hl-7uH"/>
+                        <outlet property="tableHeightConstraint" destination="qy9-FX-uuV" id="xVN-jD-I6w"/>
+                        <outlet property="tableTopConstraint" destination="NgR-5v-IUd" id="awk-Ya-evd"/>
                         <outlet property="tableView" destination="REx-UL-PgW" id="Cyn-H2-Ctx"/>
                     </connections>
                 </viewController>
@@ -440,13 +445,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security has been enabled by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FfO-7Z-4z9">
+                                <rect key="frame" x="74" y="391" width="226" height="24"/>
+                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deep Gajera" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFs-Ye-xiC">
+                                <rect key="frame" x="139" y="423" width="96" height="24"/>
+                                <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.9648095965385437" green="0.96865934133529663" blue="0.96855038404464722" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="F9H-Jw-1xh" firstAttribute="leading" secondItem="H3D-gw-0jU" secondAttribute="leading" constant="-27" id="0jX-97-gmL"/>
+                            <constraint firstItem="hFs-Ye-xiC" firstAttribute="top" secondItem="FfO-7Z-4z9" secondAttribute="bottom" constant="8" id="37o-GV-FeW"/>
                             <constraint firstItem="Af9-Ib-Ryl" firstAttribute="centerX" secondItem="F9H-Jw-1xh" secondAttribute="centerX" id="5lK-f2-1tI"/>
                             <constraint firstItem="6zv-VW-W0X" firstAttribute="top" secondItem="F9H-Jw-1xh" secondAttribute="top" constant="20" id="5yp-g9-WqY"/>
                             <constraint firstAttribute="bottom" secondItem="2SF-ys-6c8" secondAttribute="bottom" id="DwN-LL-QeE"/>
+                            <constraint firstItem="hFs-Ye-xiC" firstAttribute="centerX" secondItem="Ow7-H5-93m" secondAttribute="centerX" id="EOA-YK-e33"/>
+                            <constraint firstItem="FfO-7Z-4z9" firstAttribute="centerX" secondItem="Ow7-H5-93m" secondAttribute="centerX" id="EW5-JW-H7t"/>
                             <constraint firstItem="gaK-aR-2lQ" firstAttribute="top" secondItem="H3D-gw-0jU" secondAttribute="bottom" constant="9" id="KDN-un-Wbg"/>
                             <constraint firstItem="2SF-ys-6c8" firstAttribute="top" secondItem="Ow7-H5-93m" secondAttribute="top" constant="20" symbolic="YES" id="ML7-1j-ia8"/>
                             <constraint firstItem="gaK-aR-2lQ" firstAttribute="trailing" secondItem="F9H-Jw-1xh" secondAttribute="trailing" id="Y6N-ae-CcE"/>
@@ -459,6 +479,7 @@
                             <constraint firstItem="F9H-Jw-1xh" firstAttribute="trailing" secondItem="xYQ-yV-kwC" secondAttribute="trailing" id="mj0-Mf-syW"/>
                             <constraint firstItem="gaK-aR-2lQ" firstAttribute="bottom" secondItem="F9H-Jw-1xh" secondAttribute="bottom" id="nJi-Yo-FkC"/>
                             <constraint firstItem="xYQ-yV-kwC" firstAttribute="leading" secondItem="F9H-Jw-1xh" secondAttribute="leading" id="qWU-A0-qTr"/>
+                            <constraint firstItem="FfO-7Z-4z9" firstAttribute="centerY" secondItem="Ow7-H5-93m" secondAttribute="centerY" constant="69" id="yh2-ZD-lvJ"/>
                             <constraint firstItem="gaK-aR-2lQ" firstAttribute="leading" secondItem="F9H-Jw-1xh" secondAttribute="leading" id="z4z-sY-DZB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="F9H-Jw-1xh"/>
@@ -469,6 +490,8 @@
                         <outlet property="bgImage" destination="2SF-ys-6c8" id="Qhd-L7-J6h"/>
                         <outlet property="collectionView" destination="gaK-aR-2lQ" id="aV1-4h-OsN"/>
                         <outlet property="messageView" destination="xYQ-yV-kwC" id="hzc-V7-0X8"/>
+                        <outlet property="modificationDetailLabel" destination="hFs-Ye-xiC" id="dz9-Hk-KHO"/>
+                        <outlet property="modificationStatusLabel" destination="FfO-7Z-4z9" id="mvJ-Vf-OZz"/>
                         <outlet property="securityButton" destination="6zv-VW-W0X" id="RIz-Rz-QPi"/>
                         <outlet property="securityStateLabel" destination="Af9-Ib-Ryl" id="cYU-lV-nRm"/>
                     </connections>

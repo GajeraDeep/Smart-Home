@@ -24,6 +24,17 @@ enum SecurityState: Int {
             return "Breach Detected"
         }
     }
+    
+    var infoString: String {
+        switch self {
+        case .enabled:
+            return "Security has been enabled by"
+        case .breached:
+            return "Security breached"
+        default:
+            return ""
+        }
+    }
 }
 
 enum ControllerAccessState: String {
@@ -214,17 +225,19 @@ class StatesManager {
             if let state = self.security {
                 if state == .enabled {
                     self.security = .dissabled
+                    pushNotificationWith(security!)
                     Fire.shared.setData(0, at: securityPath.child("state"), complitionHandler: nil)
                 } else if state == .breached {
                     self.security = .enabled
+                    pushNotificationWith(security!)
                     Fire.shared.setData(0, at: securityPath.child("breached"), complitionHandler: nil)
                 } else {
                     self.security = .enabled
+                    pushNotificationWith(security!)
                     Fire.shared.setData(1, at: self.securityPath.child("state"), complitionHandler: nil)
                 }
             }
-            pushNotificationWith(security!)
-            
+
         default:
             break
         }
